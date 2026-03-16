@@ -14,6 +14,7 @@ const modules = [
 
 export default function RequestToolPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -22,8 +23,8 @@ export default function RequestToolPage() {
         <div className="container-narrow">
           <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">Custom AI Tools</p>
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tighter mb-6">Request a Custom AI Tool</h1>
-            <p className="text-xl text-muted-foreground max-w-[55ch] mx-auto">Tell us about your workflow and we'll build a custom AI solution tailored to your organization.</p>
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tighter mb-6">Request Custom Automation</h1>
+            <p className="text-xl text-muted-foreground max-w-[55ch] mx-auto">Share your workflow requirements and upload reference files so we can design a custom healthcare automation solution.</p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-16">
@@ -45,7 +46,10 @@ export default function RequestToolPage() {
               className="bg-card rounded-2xl p-8 shadow-card border border-border space-y-5"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                setSubmitted(true);
+              }}
             >
               {submitted ? (
                 <div className="text-center py-10">
@@ -59,12 +63,34 @@ export default function RequestToolPage() {
                     <input className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm" placeholder="Your organization" />
                   </div>
                   <div>
+                    <label className="text-sm font-medium mb-1.5 block">Automation Request Title</label>
+                    <input className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm" placeholder="Ex: Claims Intake and Validation" />
+                  </div>
+                  <div>
                     <label className="text-sm font-medium mb-1.5 block">Email</label>
                     <input type="email" className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm" placeholder="you@organization.com" />
                   </div>
                   <div>
-                    <label className="text-sm font-medium mb-1.5 block">Use Case Description</label>
-                    <textarea rows={5} className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm resize-none" placeholder="Describe the workflow you want to automate..." />
+                    <label className="text-sm font-medium mb-1.5 block">Current Workflow Details</label>
+                    <textarea rows={4} className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm resize-none" placeholder="Describe the current process, tools, and team steps..." />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium mb-1.5 block">Automation Goals</label>
+                    <textarea rows={4} className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm resize-none" placeholder="What should be automated and what outcomes do you expect?" />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium mb-1.5 block">Reference Files (Images / Videos)</label>
+                    <input
+                      type="file"
+                      accept="image/*,video/*"
+                      multiple
+                      className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm file:mr-4 file:rounded-md file:border-0 file:bg-primary/10 file:px-3 file:py-1.5 file:text-primary"
+                      onChange={(e) => setUploadedFiles(Array.from(e.target.files ?? []))}
+                    />
+                    <p className="text-xs text-muted-foreground mt-2">Upload screenshots, sample documents, and walkthrough videos to help us scope your request.</p>
+                    {uploadedFiles.length > 0 && (
+                      <p className="text-xs text-primary mt-2">{uploadedFiles.length} file(s) selected: {uploadedFiles.map((file) => file.name).join(", ")}</p>
+                    )}
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-1.5 block">Preferred AI Modules</label>
@@ -78,7 +104,7 @@ export default function RequestToolPage() {
                     </div>
                   </div>
                   <button type="submit" className="w-full bg-primary text-primary-foreground py-3 rounded-full font-medium hover:opacity-90 animate-settle shadow-glow">
-                    Submit Request
+                    Submit Automation Request
                   </button>
                 </>
               )}

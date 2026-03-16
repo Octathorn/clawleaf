@@ -47,8 +47,8 @@ export default function UseCasesPage() {
           </div>
 
           <motion.div className="text-center mt-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            <Link to="/contact" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-semibold shadow-glow hover:opacity-90">
-              Book a Demo <ArrowRight size={18} />
+            <Link to="/request-tool" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-semibold shadow-glow hover:opacity-90">
+              Request Custom Automation <ArrowRight size={18} />
             </Link>
           </motion.div>
         </div>

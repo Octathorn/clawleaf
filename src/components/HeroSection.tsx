@@ -35,10 +35,10 @@ export default function HeroSection() {
 
           <div className="flex flex-wrap gap-4">
             <Link
-              to="/contact"
+              to="/request-tool"
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-semibold text-base shadow-glow hover:opacity-90 animate-settle"
             >
-              Book a Demo
+              Request Custom Automation
               <ArrowRight size={18} />
             </Link>
             <Link

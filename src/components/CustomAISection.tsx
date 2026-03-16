@@ -31,7 +31,7 @@ export default function CustomAISection() {
               to="/request-tool"
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-medium hover:opacity-90 animate-settle shadow-glow"
             >
-              Request Custom Tool
+              Request Custom Automation
             </Link>
           </motion.div>
 

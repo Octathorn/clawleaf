@@ -44,10 +44,10 @@ export default function Navbar() {
             Contact Sales
           </Link>
           <Link
-            to="/contact"
+            to="/request-tool"
             className="text-sm font-medium bg-primary text-primary-foreground px-5 py-2.5 rounded-full hover:opacity-90 animate-settle shadow-glow"
           >
-            Book a Demo
+            Request Custom Automation
           </Link>
         </div>
 
@@ -80,11 +80,11 @@ export default function Navbar() {
                 </Link>
               ))}
               <Link
-                to="/contact"
+                to="/request-tool"
                 className="text-sm font-medium bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-center mt-2"
                 onClick={() => setMobileOpen(false)}
               >
-                Book a Demo
+                Request Custom Automation
               </Link>
             </div>
           </motion.div>
