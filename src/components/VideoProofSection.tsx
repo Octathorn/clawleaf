@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { PlayCircle } from "lucide-react";
 
-const videoUrl = "https://hls2.videos.sproutvideo.com/344e2c044d63fc385d2b0a9685bc47e3/3f153a7a85430840e7c8fd373d96936f/video/1080.mp4?Expires=1773666406&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9obHMyLnZpZGVvcy5zcHJvdXR2aWRlby5jb20vMzQ0ZTJjMDQ0ZDYzZmMzODVkMmIwYTk2ODViYzQ3ZTMvM2YxNTNhN2E4NTQzMDg0MGU3YzhmZDM3M2Q5NjkzNmYvdmlkZW8vMTA4MC5tcDQiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NzM2NjY0MDZ9fX1dfQ__&Signature=Ej49ldzQFg0JlcQB7WdLKP9ZxXWe7EWYWsqH0G1MBlnh2HTbqnKui2~x31QNiFhrpJaTxVqugiG5ibjuixMXNZu3Eb~JbKW9Voc-nRSTgvUF~agAI0oRTiBwNBg2Kc9Rg1KVRMi-fs00yn9LvI3NHD4jFvD28hNnwv57OJBc7tXqZhM4TCyfN8WSEo~D-xNXAl6Iz8harFvgRT3vxpiww4VLwzCqfLpgFdbZwzmfIouE0O8dTQsVB1BcJbECaCeZfQI~o8bogHTlnqJHcHdDBznwfl2u8mN~kuD4VbtZoRHFk~hj7z44k5ke~sxfOQk2N1oaacVBHS-Mzum8tR-h7A__&Key-Pair-Id=APKAIB5DGCGAQJ4GGIUQ";
+const videoUrl = "https://d2j2uxe7jasn0r.cloudfront.net/watermarks/video/BgrICs-NZj4hksnn3/videoblocks-male-pediatrician-checking-bone-x-ray-on-tablet-in-clinic-healthcare-practitioner-physician-specialist-in-medicine-providing-health-care-service-radiographic-treatment-examination-in-cabinet-hospital_rzwhgnfsv__ccb9aae47e500c9255cd7df0632f8d89__P360.mp4";
 
 const outcomes = [
   {
@@ -75,7 +75,7 @@ export default function VideoProofSection() {
             />
 
             <div className="absolute inset-y-0 right-0 flex w-full flex-col justify-between bg-gradient-to-l from-black/80 via-black/65 to-transparent p-6 text-white md:w-[43%] md:p-10">
-              <div className="text-4xl font-semibold tracking-tight">limehome</div>
+              <div className="text-4xl font-semibold tracking-tight">Clawleaf</div>
 
               <div className="space-y-7">
                 <p className="text-2xl leading-[1.35] text-white/95 md:text-[2.05rem]">
