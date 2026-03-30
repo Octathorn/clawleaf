@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import logoImage from "../assets/nav_logo.svg";
 const columns = [
   {
     title: "Product",
@@ -44,7 +44,8 @@ export default function Footer() {
         <div className="grid md:grid-cols-5 gap-10">
           <div className="md:col-span-1">
             <Link to="/" className="text-xl font-bold tracking-tight text-foreground">
-              clawleaf<span className="text-gradient">.ai</span>
+              {/* clawleaf<span className="text-gradient">.ai</span> */}
+                 <img src={logoImage} alt="Clawleaf Logo"  />
             </Link>
             <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
               Enterprise AI automation for modern healthcare organizations.

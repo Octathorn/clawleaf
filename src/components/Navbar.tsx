@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import logoImage from "../assets/nav_logo.svg";
 
 const navLinks = [
   { label: "Product", href: "/product" },
@@ -20,9 +21,9 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 glass-surface">
       <div className="container-narrow flex items-center justify-between h-16">
         <Link to="/" className="text-xl font-bold tracking-tight text-foreground">
-          clawleaf<span className="text-gradient">.ai</span>
+           <img src={logoImage} alt="Clawleaf Logo"  />
         </Link>
-
+       
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
