@@ -15,6 +15,7 @@ import ContactPage from "./pages/ContactPage.tsx";
 import UseCasesPage from "./pages/UseCasesPage.tsx";
 import RequestToolPage from "./pages/RequestToolPage.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
+import WhatsAppFloat from "./components/WhatsAppFloat.tsx";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
+        <WhatsAppFloat />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/product" element={<ProductPage />} />

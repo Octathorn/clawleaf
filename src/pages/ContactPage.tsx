@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";
+import { OFFICE_ADDRESS } from "@/config/contact";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -24,15 +25,15 @@ export default function ContactPage() {
                 {[
                   { icon: Mail, label: "Email", value: "hello@clawleaf.com" },
                   { icon: Phone, label: "Phone", value: "+1 (888) 555-0123" },
-                  { icon: MapPin, label: "Office", value: "San Francisco, CA" },
+                  { icon: MapPin, label: "Office", value: OFFICE_ADDRESS },
                 ].map((item) => (
-                  <div key={item.label} className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <div key={item.label} className="flex items-start gap-4">
+                    <div className="w-10 h-10 shrink-0 rounded-xl bg-primary/10 flex items-center justify-center">
                       <item.icon className="w-5 h-5 text-primary" />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <div className="text-xs text-muted-foreground">{item.label}</div>
-                      <div className="text-sm font-medium">{item.value}</div>
+                      <div className="text-sm font-medium text-pretty">{item.value}</div>
                     </div>
                   </div>
                 ))}

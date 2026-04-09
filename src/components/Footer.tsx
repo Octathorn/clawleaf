@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logoImage from "../assets/nav_logo.svg";
+import { OFFICE_ADDRESS } from "@/config/contact";
 const columns = [
   {
     title: "Product",
@@ -49,6 +50,9 @@ export default function Footer() {
             </Link>
             <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
               Enterprise AI automation for modern healthcare organizations.
+            </p>
+            <p className="text-xs text-muted-foreground mt-4 leading-relaxed max-w-xs text-pretty">
+              {OFFICE_ADDRESS}
             </p>
           </div>
 

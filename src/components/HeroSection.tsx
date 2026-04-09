@@ -5,7 +5,7 @@ import heroVisual from "@/assets/hero-visual.png";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[90svh] hero-gradient flex items-center overflow-hidden">
+    <section className="relative min-h-[90svh] hero-gradient flex items-center overflow-hidden pb-16 md:pb-20">
       {/* Subtle grid overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: "linear-gradient(hsl(0 0% 100%) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 100%) 1px, transparent 1px)",
