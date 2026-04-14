@@ -1,5 +1,2 @@
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
-
-createRoot(document.getElementById("root")!).render(<App />);
+// Legacy entrypoint kept for safety; SSR uses `src/entry-client.tsx`.
+import "./entry-client";

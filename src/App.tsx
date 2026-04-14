@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -24,23 +24,21 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <ScrollToTop />
-        <WhatsAppFloat />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/product" element={<ProductPage />} />
-          <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/security" element={<SecurityPage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:slug" element={<BlogArticlePage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/use-cases" element={<UseCasesPage />} />
-          <Route path="/request-tool" element={<RequestToolPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <ScrollToTop />
+      <WhatsAppFloat />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/product" element={<ProductPage />} />
+        <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/security" element={<SecurityPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogArticlePage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/use-cases" element={<UseCasesPage />} />
+        <Route path="/request-tool" element={<RequestToolPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </TooltipProvider>
   </QueryClientProvider>
 );
