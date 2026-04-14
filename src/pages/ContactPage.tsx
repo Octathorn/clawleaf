@@ -24,7 +24,7 @@ export default function ContactPage() {
               <div className="space-y-6 mb-10">
                 {[
                   { icon: Mail, label: "Email", value: "hello@clawleaf.com" },
-                  { icon: Phone, label: "Phone", value: "+1 (888) 555-0123" },
+                  { icon: Phone, label: "Phone", value: "+92 337 9611571" },
                   { icon: MapPin, label: "Office", value: OFFICE_ADDRESS },
                 ].map((item) => (
                   <div key={item.label} className="flex items-start gap-4">
