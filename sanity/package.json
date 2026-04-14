@@ -1,0 +1,14 @@
+{
+  "name": "clawleaf-sanity-studio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev --host localhost --port 3333",
+    "build": "sanity build"
+  },
+  "dependencies": {
+    "@sanity/vision": "^3.86.1",
+    "sanity": "^3.86.1",
+    "styled-components": "^6.4.0"
+  }
+}

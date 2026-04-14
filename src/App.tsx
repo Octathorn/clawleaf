@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
@@ -17,10 +18,8 @@ import RequestToolPage from "./pages/RequestToolPage.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 import WhatsAppFloat from "./components/WhatsAppFloat.tsx";
 
-const queryClient = new QueryClient();
-
 const App = () => (
-  <QueryClientProvider client={queryClient}>
+  <QueryClientProvider client={useState(() => new QueryClient())[0]}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
