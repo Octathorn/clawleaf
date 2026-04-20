@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import heroVisual from "@/assets/hero-visual.png";
+import { heroShowcaseVideoSrc } from "@/config/showcaseVideos";
+import { ShowcaseVideo } from "@/components/ShowcaseVideo";
 
 export default function HeroSection() {
   return (
@@ -70,13 +72,17 @@ export default function HeroSection() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.2, 0.8, 0.2, 1] }}
         >
-          <div className="relative animate-float">
-            <img
-              src={heroVisual}
-              alt="AI medical automation pipeline showing documents and data processing"
-              className="w-full rounded-3xl"
+          <div className="relative animate-float overflow-hidden rounded-3xl">
+            <ShowcaseVideo
+              src={heroShowcaseVideoSrc}
+              poster={heroVisual}
+              preload="auto"
+              playWhenVisible={false}
+              wrapperClassName="relative aspect-[4/3] w-full"
+              videoClassName="absolute inset-0 h-full w-full object-cover"
+              aria-label="Medical OCR and document processing automation preview"
             />
-            <div className="absolute inset-0 rounded-3xl" style={{
+            <div className="pointer-events-none absolute inset-0 rounded-3xl" style={{
               background: "radial-gradient(ellipse at center, transparent 50%, hsl(222 47% 8%) 100%)"
             }} />
           </div>

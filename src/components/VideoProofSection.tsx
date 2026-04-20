@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { PlayCircle } from "lucide-react";
+import heroVisual from "@/assets/hero-visual.png";
+import { videoProofShowcaseSrc } from "@/config/showcaseVideos";
+import { ShowcaseVideo } from "@/components/ShowcaseVideo";
 
-const videoUrl = "https://d2j2uxe7jasn0r.cloudfront.net/watermarks/video/BgrICs-NZj4hksnn3/videoblocks-male-pediatrician-checking-bone-x-ray-on-tablet-in-clinic-healthcare-practitioner-physician-specialist-in-medicine-providing-health-care-service-radiographic-treatment-examination-in-cabinet-hospital_rzwhgnfsv__ccb9aae47e500c9255cd7df0632f8d89__P360.mp4";
+const videoUrl = videoProofShowcaseSrc;
 
 const outcomes = [
   {
@@ -63,15 +66,14 @@ export default function VideoProofSection() {
           viewport={{ once: true }}
         >
           <div className="relative min-h-[320px] md:min-h-[460px]">
-            <video
-              className="absolute inset-0 h-full w-full object-cover"
+            <ShowcaseVideo
               src={videoUrl}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label="Customer case study video"
+              poster={heroVisual}
+              preload="auto"
+              playWhenVisible={false}
+              wrapperClassName="absolute inset-0"
+              videoClassName="absolute inset-0 h-full w-full object-cover"
+              aria-label="Automated appointment booking and patient scheduling preview"
             />
 
             <div className="absolute inset-y-0 right-0 flex w-full flex-col justify-between bg-gradient-to-l from-black/80 via-black/65 to-transparent p-6 text-white md:w-[43%] md:p-10">

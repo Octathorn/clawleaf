@@ -3,6 +3,8 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { FileText, Brain, Eye, Mic, Zap, Shield, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { productFeatureVideoByTitle } from "@/config/showcaseVideos";
+import { ShowcaseVideo } from "@/components/ShowcaseVideo";
 
 const features = [
   { icon: FileText, title: "Medical OCR Engine", desc: "Extract structured data from any medical document — handwritten notes, lab results, prescriptions, and insurance forms. Supports 50+ document types with 99.4% accuracy.", specs: ["50+ document types", "99.4% accuracy", "< 2s processing"] },
@@ -46,8 +48,23 @@ export default function ProductPage() {
                     ))}
                   </div>
                 </div>
-                <div className={`bg-secondary/50 rounded-3xl h-64 flex items-center justify-center ${i % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <f.icon className="w-20 h-20 text-primary/20" />
+                <div className={`overflow-hidden rounded-3xl border border-border bg-secondary/50 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
+                  {productFeatureVideoByTitle[f.title] ? (
+                    <div className="aspect-video w-full min-h-[240px]">
+                      <ShowcaseVideo
+                        src={productFeatureVideoByTitle[f.title]}
+                        playWhenVisible
+                        preload="metadata"
+                        wrapperClassName="h-full w-full min-h-[240px]"
+                        videoClassName="h-full w-full min-h-[240px] object-cover"
+                        aria-label={`${f.title} platform preview`}
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex h-64 items-center justify-center">
+                      <f.icon className="h-20 w-20 text-primary/20" />
+                    </div>
+                  )}
                 </div>
               </motion.div>
             ))}

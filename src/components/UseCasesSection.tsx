@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCaseVideoByTitle } from "@/config/showcaseVideos";
+import { ShowcaseVideo } from "@/components/ShowcaseVideo";
 
 const useCases = [
   { title: "Patient Intake Automation", desc: "Digitize and process patient intake forms automatically, reducing wait times by 80%." },
@@ -44,6 +46,18 @@ export default function UseCasesSection() {
             >
               <h3 className="text-sm font-semibold mb-2 text-foreground">{uc.title}</h3>
               <p className="text-xs text-muted-foreground leading-relaxed mb-4">{uc.desc}</p>
+              {useCaseVideoByTitle[uc.title] ? (
+                <div className="mb-4 aspect-video w-full overflow-hidden rounded-xl border border-border bg-muted/20">
+                  <ShowcaseVideo
+                    src={useCaseVideoByTitle[uc.title]}
+                    playWhenVisible
+                    preload="metadata"
+                    wrapperClassName="h-full w-full"
+                    videoClassName="h-full w-full object-cover"
+                    aria-label={`${uc.title} workflow preview`}
+                  />
+                </div>
+              ) : null}
               <Link to="/use-cases" className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline">
                 Learn more <ArrowRight size={12} />
               </Link>

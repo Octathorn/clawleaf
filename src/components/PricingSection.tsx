@@ -2,10 +2,20 @@ import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const plans = [
+type Plan = {
+  name: string;
+  price: string;
+  priceSuffix?: string;
+  desc: string;
+  features: string[];
+  featured: boolean;
+};
+
+const plans: Plan[] = [
   {
     name: "Starter",
-    price: "Contact Us",
+    price: "$499",
+    priceSuffix: "/month",
     desc: "Basic document automation and OCR",
     features: ["Medical OCR Processing", "Document Summarization", "5,000 pages/month", "Email Support", "Standard SLA"],
     featured: false,
@@ -55,7 +65,18 @@ export default function PricingSection() {
             >
               <h3 className={`text-lg font-bold mb-1 ${plan.featured ? "text-primary-foreground" : "text-foreground"}`}>{plan.name}</h3>
               <p className={`text-sm mb-4 ${plan.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>{plan.desc}</p>
-              <div className={`text-3xl font-bold mb-6 ${plan.featured ? "text-primary-foreground" : "text-foreground"}`}>{plan.price}</div>
+              <div
+                className={`mb-6 flex flex-wrap items-baseline gap-x-1.5 ${plan.featured ? "text-primary-foreground" : "text-foreground"}`}
+              >
+                <span className="text-3xl font-bold tracking-tight">{plan.price}</span>
+                {plan.priceSuffix ? (
+                  <span
+                    className={`text-base font-semibold ${plan.featured ? "text-primary-foreground/80" : "text-muted-foreground"}`}
+                  >
+                    {plan.priceSuffix}
+                  </span>
+                ) : null}
+              </div>
 
               <ul className="space-y-3 mb-8">
                 {plan.features.map((f) => (
