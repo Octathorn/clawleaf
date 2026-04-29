@@ -13,10 +13,10 @@ export default function FinalCTASection() {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6">
-            Transform Healthcare Operations with AI
+            Transform operations with healthcare AI agents
           </h2>
           <p className="text-lg text-muted-foreground mb-10 max-w-[50ch] mx-auto">
-            Join leading healthcare organizations automating their workflows with Clawleaf's enterprise AI platform.
+            Join organizations using Clawleaf’s agentic AI platform to automate complex clinical and administrative work safely at scale.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

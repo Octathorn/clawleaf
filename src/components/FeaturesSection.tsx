@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import {
-  FileText, Brain, Eye, CalendarCheck, Mic, ClipboardList, BookOpen, Shield
+  FileText, Brain, Eye, CalendarCheck, Mic, ClipboardList, BookOpen, Shield, Bot
 } from "lucide-react";
 
 const features = [
+  { icon: Bot, title: "Healthcare AI Agents", desc: "Agentic AI that plans, reasons, and executes multi-step clinical and administrative tasks with human oversight hooks." },
   { icon: FileText, title: "Medical OCR & Document Processing", desc: "Extract structured data from handwritten prescriptions, lab reports, and medical forms with 99.4% accuracy." },
   { icon: Brain, title: "AI Document Summarization", desc: "Automatically summarize lengthy clinical notes, discharge summaries, and patient records." },
   { icon: Eye, title: "Computer Vision for Medical Imaging", desc: "Analyze X-rays, scans, and medical images with enterprise-grade computer vision models." },
@@ -30,7 +31,7 @@ export default function FeaturesSection() {
             Core Platform Features
           </h2>
           <p className="text-muted-foreground text-lg max-w-[55ch] mx-auto">
-            Purpose-built AI tools designed for healthcare workflows, from document processing to intelligent automation.
+            Purpose-built AI and autonomous agents for healthcare—from agentic orchestration to document processing and voice automation.
           </p>
         </motion.div>
 

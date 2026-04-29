@@ -24,14 +24,14 @@ const plans: Plan[] = [
     name: "Professional",
     price: "Contact Us",
     desc: "Advanced AI automation and voice systems",
-    features: ["Everything in Starter", "Voice AI Reception", "Computer Vision", "25,000 pages/month", "Priority Support", "Custom Integrations"],
+    features: ["Everything in Starter", "Healthcare AI agents", "Voice AI Reception", "Computer Vision", "25,000 pages/month", "Priority Support", "Custom Integrations"],
     featured: true,
   },
   {
     name: "Enterprise",
     price: "Custom",
     desc: "Custom AI tools and integrations for large organizations",
-    features: ["Everything in Professional", "Custom AI Tools", "Unlimited Processing", "Dedicated Support", "On-Premise Option", "SLA Guarantee"],
+    features: ["Everything in Professional", "Custom agentic workflows", "Custom AI Tools", "Unlimited Processing", "Dedicated Support", "On-Premise Option", "SLA Guarantee"],
     featured: false,
   },
 ];

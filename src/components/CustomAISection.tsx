@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { FileText, Mic, Brain, Eye, Zap } from "lucide-react";
+import { FileText, Mic, Brain, Eye, Zap, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const modules = [
+  { icon: Bot, label: "AI Agents" },
   { icon: FileText, label: "OCR" },
   { icon: Mic, label: "Voice AI" },
   { icon: Brain, label: "Document AI" },
@@ -20,12 +21,12 @@ export default function CustomAISection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">Custom AI Tools</p>
+            <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">Agentic AI & custom tools</p>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">
-              Build Custom AI for Your Workflow
+              Custom agents & AI for your workflows
             </h2>
             <p className="text-muted-foreground text-lg mb-8 max-w-[50ch]">
-              Request purpose-built AI tools tailored to your organization's specific medical workflows. Our modular architecture lets you plug in exactly what you need.
+              Request agentic workflows and purpose-built healthcare agents tailored to your operations. Our modular stack lets you combine agents, OCR, voice, and vision as one system.
             </p>
             <Link
               to="/request-tool"
@@ -44,14 +45,14 @@ export default function CustomAISection() {
             {/* Central core */}
             <div className="relative flex items-center justify-center">
               <div className="w-32 h-32 rounded-3xl bg-primary/10 border border-primary/20 flex items-center justify-center shadow-glow mx-auto">
-                <span className="text-sm font-bold text-primary text-center leading-tight">Clawleaf<br/>Core</span>
+                <span className="text-sm font-bold text-primary text-center leading-tight">Clawleaf<br/>agent core</span>
               </div>
 
               {/* Module orbits */}
               <div className="absolute inset-0 flex items-center justify-center">
                 {modules.map((mod, i) => {
-                  const angle = (i * 72 - 90) * (Math.PI / 180);
-                  const radius = 130;
+                  const angle = ((360 / modules.length) * i - 90) * (Math.PI / 180);
+                  const radius = 140;
                   const x = Math.cos(angle) * radius;
                   const y = Math.sin(angle) * radius;
 

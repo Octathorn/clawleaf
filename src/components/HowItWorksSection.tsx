@@ -3,9 +3,9 @@ import { Upload, Cpu, Search, Zap, BarChart3 } from "lucide-react";
 
 const steps = [
   { icon: Upload, title: "Upload or Connect", desc: "Connect your medical data sources — EMR, documents, imaging systems." },
-  { icon: Cpu, title: "AI Processes Data", desc: "Our AI engine processes documents, images, and voice data simultaneously." },
+  { icon: Cpu, title: "AI & Agents Process Data", desc: "Models and specialized agents process documents, images, and voice data in parallel." },
   { icon: Search, title: "Extract & Understand", desc: "Structured medical information is extracted with clinical-grade accuracy." },
-  { icon: Zap, title: "Automate Tasks", desc: "Administrative workflows are automated — billing, scheduling, records." },
+  { icon: Zap, title: "Agentic Automation", desc: "AI agents complete multi-step workflows—billing, scheduling, records, and follow-ups." },
   { icon: BarChart3, title: "Deliver Insights", desc: "Receive structured data, analytics, and actionable clinical insights." },
 ];
 
@@ -24,7 +24,7 @@ export default function HowItWorksSection() {
             From Data to Action in Minutes
           </h2>
           <p className="text-muted-foreground text-lg max-w-[55ch] mx-auto">
-            A streamlined AI pipeline that transforms raw medical data into structured, actionable outcomes.
+            A streamlined agentic pipeline that turns raw medical data into structured, governed actions your teams can trust.
           </p>
         </motion.div>
 

@@ -23,16 +23,16 @@ export default function HeroSection() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/10 mb-8">
             <div className="w-2 h-2 rounded-full bg-accent animate-pulse-glow" />
-            <span className="text-xs font-medium text-accent">Enterprise AI for Healthcare</span>
+            <span className="text-xs font-medium text-accent">The Future of Healthcare, Autonomous</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-[0.95] mb-6" style={{ color: "hsl(0 0% 100%)" }}>
-            AI Automation for{" "}
-            <span className="text-gradient">Modern Healthcare</span>
+            AI agents & automation for{" "}
+            <span className="text-gradient">modern healthcare</span>
           </h1>
 
           <p className="text-lg md:text-xl max-w-[55ch] mb-10 leading-relaxed" style={{ color: "hsl(210 40% 75%)" }}>
-            Automate medical workflows using OCR, Computer Vision, Voice AI, and intelligent document processing.
+            Deploy autonomous healthcare agents and agentic workflows alongside OCR, computer vision, voice AI, and intelligent document processing.
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -68,23 +68,34 @@ export default function HeroSection() {
 
         <motion.div
           className="lg:col-span-5 hidden lg:block"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.2, 0.8, 0.2, 1] }}
+          initial={{ opacity: 0, scale: 0.98, y: 12 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.85, delay: 0.2, ease: [0.2, 0.8, 0.2, 1] }}
         >
-          <div className="relative animate-float overflow-hidden rounded-3xl">
-            <ShowcaseVideo
-              src={heroShowcaseVideoSrc}
-              poster={heroVisual}
-              preload="auto"
-              playWhenVisible={false}
-              wrapperClassName="relative aspect-[4/3] w-full"
-              videoClassName="absolute inset-0 h-full w-full object-cover"
-              aria-label="Medical OCR and document processing automation preview"
-            />
-            <div className="pointer-events-none absolute inset-0 rounded-3xl" style={{
-              background: "radial-gradient(ellipse at center, transparent 50%, hsl(222 47% 8%) 100%)"
-            }} />
+          {/* Media frame: no continuous float (avoids jitter); soft edge blend into hero */}
+          <div className="relative mx-auto max-w-lg">
+            <div className="relative overflow-hidden rounded-3xl bg-[hsl(222_47%_9%/0.95)] shadow-[0_24px_70px_-18px_rgba(0,0,0,0.6)] ring-1 ring-white/[0.09] md:rounded-[1.6rem]">
+              <ShowcaseVideo
+                src={heroShowcaseVideoSrc}
+                poster={heroVisual}
+                preload="auto"
+                playWhenVisible={false}
+                wrapperClassName="relative aspect-[4/3] w-full"
+                videoClassName="absolute inset-0 h-full w-full object-cover"
+                aria-label="Healthcare AI agents and document automation preview"
+              />
+              <div
+                className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-white/[0.06]"
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-80"
+                style={{
+                  background: "linear-gradient(180deg, hsl(0 0% 100% / 0.06) 0%, transparent 42%)",
+                }}
+                aria-hidden
+              />
+            </div>
           </div>
         </motion.div>
       </div>

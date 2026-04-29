@@ -15,7 +15,7 @@ const columns = [
     title: "Solutions",
     links: [
       { label: "Use Cases", href: "/use-cases" },
-      { label: "Custom AI Tools", href: "/request-tool" },
+      { label: "AI agents & custom tools", href: "/request-tool" },
       { label: "Integrations", href: "/product" },
     ],
   },
@@ -49,7 +49,7 @@ export default function Footer() {
                  <img src={logoImage} alt="Clawleaf Logo"  />
             </Link>
             <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
-              Enterprise AI automation for modern healthcare organizations.
+              Healthcare AI agents & agentic automation for modern organizations.
             </p>
             <p className="text-xs text-muted-foreground mt-4 leading-relaxed max-w-xs text-pretty">
               {OFFICE_ADDRESS}

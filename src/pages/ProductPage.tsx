@@ -1,17 +1,18 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { FileText, Brain, Eye, Mic, Zap, Shield, ArrowRight } from "lucide-react";
+import { FileText, Brain, Eye, Mic, Zap, Shield, ArrowRight, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
-import { productFeatureVideoByTitle } from "@/config/showcaseVideos";
+import { getShowcaseClip, productFeatureVideoByTitle } from "@/config/showcaseVideos";
 import { ShowcaseVideo } from "@/components/ShowcaseVideo";
 
 const features = [
+  { icon: Bot, title: "Healthcare AI Agents", desc: "Orchestrate agentic workflows that reason over policies, tools, and healthcare data to complete multi-step tasks with clear audit trails and guardrails.", specs: ["Multi-step planning", "Tool use & integrations", "Human-in-the-loop"] },
   { icon: FileText, title: "Medical OCR Engine", desc: "Extract structured data from any medical document — handwritten notes, lab results, prescriptions, and insurance forms. Supports 50+ document types with 99.4% accuracy.", specs: ["50+ document types", "99.4% accuracy", "< 2s processing"] },
   { icon: Brain, title: "Document AI", desc: "Summarize, classify, and extract key insights from lengthy medical records, clinical notes, and research documents.", specs: ["Multi-language support", "Context-aware extraction", "Batch processing"] },
   { icon: Eye, title: "Computer Vision", desc: "Analyze medical images including X-rays, pathology slides, and diagnostic scans with enterprise-grade computer vision models.", specs: ["DICOM compatible", "Real-time analysis", "Custom model training"] },
   { icon: Mic, title: "Voice AI", desc: "Natural language voice agents that handle patient calls, schedule appointments, and answer common medical queries 24/7.", specs: ["Natural language", "Multi-accent support", "HIPAA-compliant calls"] },
-  { icon: Zap, title: "Workflow Automation", desc: "Connect AI capabilities to existing hospital systems — automate billing, scheduling, records management, and administrative tasks.", specs: ["EMR integration", "Custom workflows", "API access"] },
+  { icon: Zap, title: "Workflow Automation", desc: "Connect models and AI agents to hospital systems—automate billing, scheduling, records management, and policy-aware administrative tasks.", specs: ["EMR integration", "Agent-ready workflows", "API access"] },
   { icon: Shield, title: "Security Layer", desc: "Enterprise security with end-to-end encryption, role-based access, audit logging, and full HIPAA compliance.", specs: ["AES-256 encryption", "SOC 2 Type II", "HIPAA compliant"] },
 ];
 
@@ -24,7 +25,7 @@ export default function ProductPage() {
           <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">Platform Overview</p>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tighter mb-6">The Complete AI Platform for Healthcare</h1>
-            <p className="text-xl text-muted-foreground max-w-[60ch] mx-auto">From document processing to voice AI, Clawleaf provides every tool healthcare organizations need to automate their operations.</p>
+            <p className="text-xl text-muted-foreground max-w-[60ch] mx-auto">From autonomous healthcare agents to OCR, vision, and voice, Clawleaf gives teams one platform for agentic AI and operational automation.</p>
           </motion.div>
 
           <div className="space-y-16">
@@ -52,7 +53,7 @@ export default function ProductPage() {
                   {productFeatureVideoByTitle[f.title] ? (
                     <div className="aspect-video w-full min-h-[240px]">
                       <ShowcaseVideo
-                        src={productFeatureVideoByTitle[f.title]}
+                        {...getShowcaseClip(productFeatureVideoByTitle[f.title])}
                         playWhenVisible
                         preload="metadata"
                         wrapperClassName="h-full w-full min-h-[240px]"

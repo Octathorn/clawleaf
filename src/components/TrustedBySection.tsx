@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 
 const logos = [
-  "HousecallMD",
-  "Teladoc Health",
-  "One Medical",
-  "Oak Street Health",
-  "CVS Health",
+  "HouseCall MD",
+  "Platinum Medical Evaluations",
+  "Vital Heal",
+  "Supportive Care Specialists",
+  "OPPMED",
+  "EverHeal",
 ];
 
 const marqueeItems = [...logos, ...logos];

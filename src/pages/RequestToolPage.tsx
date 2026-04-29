@@ -1,15 +1,16 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { FileText, Mic, Brain, Eye, Zap } from "lucide-react";
+import { FileText, Mic, Brain, Eye, Zap, Bot } from "lucide-react";
 import { useState } from "react";
 
 const modules = [
+  { icon: Bot, label: "Healthcare AI Agents" },
   { icon: FileText, label: "OCR" },
   { icon: Mic, label: "Voice AI" },
   { icon: Brain, label: "Document AI" },
   { icon: Eye, label: "Computer Vision" },
-  { icon: Zap, label: "Automation" },
+  { icon: Zap, label: "Workflow Automation" },
 ];
 
 export default function RequestToolPage() {
@@ -22,14 +23,14 @@ export default function RequestToolPage() {
       <section className="pt-32 section-padding">
         <div className="container-narrow">
           <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">Custom AI Tools</p>
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tighter mb-6">Request Custom Automation</h1>
-            <p className="text-xl text-muted-foreground max-w-[55ch] mx-auto">Share your workflow requirements and upload reference files so we can design a custom healthcare automation solution.</p>
+            <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">Agentic AI & agents</p>
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tighter mb-6">Request custom agents & automation</h1>
+            <p className="text-xl text-muted-foreground max-w-[55ch] mx-auto">Tell us about your workflows and upload reference files—we design healthcare AI agents and integrations around your policies and systems.</p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-16">
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-              <h3 className="text-xl font-bold mb-6">Available Modules</h3>
+              <h3 className="text-xl font-bold mb-6">Modules & agent capabilities</h3>
               <div className="space-y-4">
                 {modules.map((m) => (
                   <div key={m.label} className="flex items-center gap-4 bg-card rounded-xl p-4 shadow-card border border-border">

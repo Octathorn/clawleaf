@@ -69,7 +69,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-1.5 block">Organization</label>
-                    <input className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm" placeholder="Metro Health Systems" />
+                    <input className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm" placeholder="HouseCall MD" />
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-1.5 block">Message</label>

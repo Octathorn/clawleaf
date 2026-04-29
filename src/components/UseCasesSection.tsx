@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useCaseVideoByTitle } from "@/config/showcaseVideos";
+import { getShowcaseClip, useCaseVideoByTitle } from "@/config/showcaseVideos";
 import { ShowcaseVideo } from "@/components/ShowcaseVideo";
 
 const useCases = [
+  { title: "Agentic Operations & Orchestration", desc: "Coordinate billing, prior auth, and scheduling with AI agents that hand off work across systems and teams." },
   { title: "Patient Intake Automation", desc: "Digitize and process patient intake forms automatically, reducing wait times by 80%." },
   { title: "Insurance Claim Processing", desc: "Automate claim submission, verification, and follow-up with AI-powered document analysis." },
   { title: "Lab Result Extraction", desc: "Extract and structure lab results from various formats into standardized data." },
@@ -30,7 +31,7 @@ export default function UseCasesSection() {
             Real-World Applications
           </h2>
           <p className="text-muted-foreground text-lg max-w-[55ch] mx-auto">
-            See how healthcare organizations use Clawleaf to automate critical workflows.
+            Agentic AI and specialized agents for intake, revenue cycle, voice, and documentation—all in one platform.
           </p>
         </motion.div>
 
@@ -49,7 +50,7 @@ export default function UseCasesSection() {
               {useCaseVideoByTitle[uc.title] ? (
                 <div className="mb-4 aspect-video w-full overflow-hidden rounded-xl border border-border bg-muted/20">
                   <ShowcaseVideo
-                    src={useCaseVideoByTitle[uc.title]}
+                    {...getShowcaseClip(useCaseVideoByTitle[uc.title])}
                     playWhenVisible
                     preload="metadata"
                     wrapperClassName="h-full w-full"

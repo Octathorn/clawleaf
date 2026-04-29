@@ -3,10 +3,11 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useCaseVideoByTitle } from "@/config/showcaseVideos";
+import { getShowcaseClip, useCaseVideoByTitle } from "@/config/showcaseVideos";
 import { ShowcaseVideo } from "@/components/ShowcaseVideo";
 
 const useCases = [
+  { title: "Agentic Operations & Orchestration", desc: "Run end-to-end healthcare operations with AI agents that navigate prior authorization, eligibility, scheduling, and follow-ups—calling tools and updating systems with full traceability.", impact: "Fewer manual handoffs" },
   { title: "Patient Intake Automation", desc: "Digitize and process patient intake forms automatically. Our AI reads handwritten and printed forms, extracts patient data, and populates your EMR system — reducing wait times by 80%.", impact: "80% faster processing" },
   { title: "Insurance Claim Processing", desc: "Automate the entire claim lifecycle — from document intake to submission. AI validates claim data, flags discrepancies, and routes claims for faster reimbursement.", impact: "60% fewer claim errors" },
   { title: "Lab Result Extraction", desc: "Extract structured data from lab results in any format. Our OCR engine handles printed reports, handwritten notes, and even faxed documents with clinical-grade accuracy.", impact: "99.4% extraction accuracy" },
@@ -24,7 +25,7 @@ export default function UseCasesPage() {
           <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">Use Cases</p>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tighter mb-6">Real-World Healthcare Automation</h1>
-            <p className="text-xl text-muted-foreground max-w-[60ch] mx-auto">See how healthcare organizations use Clawleaf to automate critical workflows and improve patient outcomes.</p>
+            <p className="text-xl text-muted-foreground max-w-[60ch] mx-auto">See how healthcare teams deploy AI agents and agentic automation to streamline critical workflows and improve patient outcomes.</p>
           </motion.div>
 
           <div className="space-y-8">
@@ -44,7 +45,7 @@ export default function UseCasesPage() {
                       className={`aspect-video w-full overflow-hidden rounded-2xl border border-border bg-muted/20 ${i % 2 === 1 ? "lg:order-2" : ""}`}
                     >
                       <ShowcaseVideo
-                        src={clip}
+                        {...getShowcaseClip(clip)}
                         playWhenVisible
                         preload="metadata"
                         wrapperClassName="h-full w-full"

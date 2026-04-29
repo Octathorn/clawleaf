@@ -38,7 +38,7 @@ export default function VideoProofSection() {
             <span className="font-semibold tracking-wide text-foreground/85 md:text-sm">TO</span>
             <span className="font-semibold text-primary">AI-Accelerated Teams</span>
             <span className="font-medium text-muted-foreground">AI-Enabled Ops</span>
-            <span className="font-medium text-muted-foreground">Fully AI-Native</span>
+            <span className="font-medium text-muted-foreground">Agentic AI</span>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">

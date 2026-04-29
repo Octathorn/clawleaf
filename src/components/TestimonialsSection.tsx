@@ -5,19 +5,19 @@ const testimonials = [
     quote: "Clawleaf reduced our patient intake processing time by 85%. The OCR accuracy on handwritten forms is remarkable.",
     name: "Dr. Sarah Mitchell",
     position: "Chief Medical Officer",
-    org: "Metro Health Systems",
+    org: "HouseCall MD",
   },
   {
     quote: "The Voice AI reception handling has transformed our front desk operations. We now handle 3x more patient calls without additional staff.",
     name: "James Rodriguez",
     position: "Director of Operations",
-    org: "Pacific Care Clinics",
+    org: "Platinum Medical Evaluations",
   },
   {
     quote: "Enterprise-grade security was non-negotiable for us. Clawleaf's HIPAA-ready architecture gave our compliance team full confidence.",
     name: "Dr. Linda Chen",
     position: "VP of Clinical Technology",
-    org: "NovaMed Diagnostics",
+    org: "Vital Heal",
   },
 ];
 
