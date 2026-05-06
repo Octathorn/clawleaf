@@ -6,7 +6,7 @@ export function getWhatsAppNumber(): string {
   const raw = import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined;
   const digits = raw?.replace(/\D/g, "") ?? "";
   if (digits.length >= 10) return digits;
-  return "923379611571";
+  return "923379611572";
 }
 
 export function getWhatsAppChatUrl(): string {
