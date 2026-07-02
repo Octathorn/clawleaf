@@ -81,7 +81,7 @@ export default function HeroSection() {
                 preload="auto"
                 playWhenVisible={false}
                 wrapperClassName="relative aspect-[4/3] w-full"
-                videoClassName="absolute inset-0 h-full w-full object-cover"
+                videoClassName="absolute inset-0 h-full w-full object-contain object-center"
                 aria-label="Healthcare AI agents and document automation preview"
               />
               <div

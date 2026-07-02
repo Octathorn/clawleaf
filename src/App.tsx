@@ -15,6 +15,8 @@ import BlogArticlePage from "./pages/BlogArticlePage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import UseCasesPage from "./pages/UseCasesPage.tsx";
 import RequestToolPage from "./pages/RequestToolPage.tsx";
+import PrivacyPage from "./pages/PrivacyPage.tsx";
+import TermsPage from "./pages/TermsPage.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 import WhatsAppFloat from "./components/WhatsAppFloat.tsx";
 
@@ -36,6 +38,8 @@ const App = () => (
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/use-cases" element={<UseCasesPage />} />
         <Route path="/request-tool" element={<RequestToolPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </TooltipProvider>
