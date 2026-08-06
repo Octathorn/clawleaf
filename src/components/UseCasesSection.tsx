@@ -3,6 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getShowcaseClip, useCaseVideoByTitle } from "@/config/showcaseVideos";
 import { ShowcaseVideo } from "@/components/ShowcaseVideo";
+import { SectionHeading, fadeUp } from "@/components/site/primitives";
+import { SpotlightCard } from "@/components/site/SpotlightCard";
 
 const useCases = [
   { title: "Agentic Operations & Orchestration", desc: "Coordinate billing, prior auth, and scheduling with AI agents that hand off work across systems and teams." },
@@ -18,53 +20,52 @@ const useCases = [
 
 export default function UseCasesSection() {
   return (
-    <section className="section-padding" id="use-cases">
-      <div className="container-narrow">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">Use Cases</p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">
-            Real-World Applications
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-[55ch] mx-auto">
-            Agentic AI and specialized agents for intake, revenue cycle, voice, and documentation—all in one platform.
-          </p>
-        </motion.div>
+    <section className="relative section-padding" id="use-cases">
+      <div className="container-wide">
+        <SectionHeading
+          eyebrow="Use Cases"
+          title="Real-world applications, deployed"
+          subtitle="Agentic AI and specialized agents for intake, revenue cycle, voice, and documentation — all in one platform."
+        />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {useCases.map((uc, i) => (
-            <motion.div
-              key={uc.title}
-              className="group bg-card rounded-2xl p-6 shadow-card border border-border hover:shadow-glow animate-settle"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
-            >
-              <h3 className="text-sm font-semibold mb-2 text-foreground">{uc.title}</h3>
-              <p className="text-xs text-muted-foreground leading-relaxed mb-4">{uc.desc}</p>
-              {useCaseVideoByTitle[uc.title] ? (
-                <div className="mb-4 aspect-video w-full overflow-hidden rounded-xl border border-border bg-muted/20">
-                  <ShowcaseVideo
-                    {...getShowcaseClip(useCaseVideoByTitle[uc.title])}
-                    playWhenVisible
-                    preload="metadata"
-                    wrapperClassName="h-full w-full"
-                    videoClassName="h-full w-full object-cover"
-                    aria-label={`${uc.title} workflow preview`}
-                  />
-                </div>
-              ) : null}
-              <Link to="/use-cases" className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline">
-                Learn more <ArrowRight size={12} />
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+        <motion.div
+          className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 } } }}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+        >
+          {useCases.map((uc) => {
+            const clip = useCaseVideoByTitle[uc.title];
+            return (
+              <motion.div key={uc.title} variants={fadeUp}>
+                <SpotlightCard className="flex h-full flex-col p-6">
+                  {clip ? (
+                    <div className="mb-5 aspect-video w-full overflow-hidden rounded-xl border border-white/10 bg-[hsl(var(--surface-2))]">
+                      <ShowcaseVideo
+                        {...getShowcaseClip(clip)}
+                        playWhenVisible
+                        preload="metadata"
+                        wrapperClassName="h-full w-full"
+                        videoClassName="h-full w-full object-cover"
+                        aria-label={`${uc.title} workflow preview`}
+                      />
+                    </div>
+                  ) : null}
+                  <h3 className="font-display text-base font-semibold text-foreground">{uc.title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{uc.desc}</p>
+                  <Link
+                    to="/use-cases"
+                    className="group/link mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
+                  >
+                    Learn more
+                    <ArrowRight size={14} className="transition-transform duration-300 group-hover/link:translate-x-1" />
+                  </Link>
+                </SpotlightCard>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );

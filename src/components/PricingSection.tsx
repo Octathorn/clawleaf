@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, Sparkles, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { SectionHeading, fadeUp } from "@/components/site/primitives";
 
 type Plan = {
   name: string;
@@ -38,50 +39,62 @@ const plans: Plan[] = [
 
 export default function PricingSection() {
   return (
-    <section className="section-padding" id="pricing">
-      <div className="container-narrow">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">Pricing</p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">Plans for Every Organization</h2>
-          <p className="text-muted-foreground text-lg max-w-[50ch] mx-auto">
-            Scalable pricing that grows with your healthcare automation needs.
-          </p>
-        </motion.div>
+    <section className="relative section-padding" id="pricing">
+      <div className="container-wide">
+        <SectionHeading
+          eyebrow="Pricing"
+          title="Plans that scale with your organization"
+          subtitle="Transparent pricing that grows with your healthcare automation needs."
+        />
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {plans.map((plan, i) => (
+        <motion.div
+          className="mx-auto mt-16 grid max-w-5xl items-stretch gap-6 md:grid-cols-3"
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+        >
+          {plans.map((plan) => (
             <motion.div
               key={plan.name}
-              className={`rounded-3xl p-8 border ${plan.featured ? "bg-primary shadow-glow border-primary/30 scale-105" : "bg-card shadow-card border-border"} animate-settle`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              variants={fadeUp}
+              className={`relative flex flex-col rounded-3xl p-8 transition-all duration-500 ${
+                plan.featured
+                  ? "border-gradient border border-white/10 bg-[hsl(var(--surface-2))] shadow-glow md:-my-2 md:scale-[1.03]"
+                  : "border border-white/[0.07] bg-[hsl(var(--card))] hover:-translate-y-1 hover:border-white/15"
+              }`}
             >
-              <h3 className={`text-lg font-bold mb-1 ${plan.featured ? "text-primary-foreground" : "text-foreground"}`}>{plan.name}</h3>
-              <p className={`text-sm mb-4 ${plan.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>{plan.desc}</p>
-              <div
-                className={`mb-6 flex flex-wrap items-baseline gap-x-1.5 ${plan.featured ? "text-primary-foreground" : "text-foreground"}`}
-              >
-                <span className="text-3xl font-bold tracking-tight">{plan.price}</span>
+              {plan.featured && (
+                <div className="absolute -top-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-gradient-to-r from-primary to-accent px-3.5 py-1 font-mono text-[0.65rem] font-semibold uppercase tracking-wider text-white shadow-glow">
+                  <Sparkles size={11} />
+                  Most Popular
+                </div>
+              )}
+
+              <h3 className="font-display text-lg font-semibold text-foreground">{plan.name}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">{plan.desc}</p>
+
+              <div className="mt-6 flex flex-wrap items-baseline gap-x-1.5">
+                <span className="font-display text-4xl font-semibold tracking-tight text-foreground">
+                  {plan.price}
+                </span>
                 {plan.priceSuffix ? (
-                  <span
-                    className={`text-base font-semibold ${plan.featured ? "text-primary-foreground/80" : "text-muted-foreground"}`}
-                  >
-                    {plan.priceSuffix}
-                  </span>
+                  <span className="text-sm font-medium text-muted-foreground">{plan.priceSuffix}</span>
                 ) : null}
               </div>
 
-              <ul className="space-y-3 mb-8">
+              <div className="my-7 h-px bg-white/[0.07]" />
+
+              <ul className="flex-1 space-y-3.5">
                 {plan.features.map((f) => (
-                  <li key={f} className={`flex items-center gap-2 text-sm ${plan.featured ? "text-primary-foreground/90" : "text-muted-foreground"}`}>
-                    <Check size={14} className={plan.featured ? "text-primary-foreground" : "text-primary"} />
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-foreground/85">
+                    <span
+                      className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
+                        plan.featured ? "bg-gradient-to-br from-primary to-accent text-white" : "bg-primary/15 text-primary"
+                      }`}
+                    >
+                      <Check size={12} />
+                    </span>
                     {f}
                   </li>
                 ))}
@@ -89,16 +102,14 @@ export default function PricingSection() {
 
               <Link
                 to="/contact"
-                className={`block text-center py-3 rounded-full font-medium text-sm animate-settle ${plan.featured
-                  ? "bg-card text-foreground hover:bg-card/90"
-                  : "bg-primary text-primary-foreground hover:opacity-90"
-                }`}
+                className={`mt-8 w-full justify-center ${plan.featured ? "btn-primary" : "btn-secondary"}`}
               >
                 Get Started
+                <ArrowRight size={16} />
               </Link>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
