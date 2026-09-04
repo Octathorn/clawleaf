@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Linkedin, Twitter, MessageCircle, ArrowUpRight, MapPin } from "lucide-react";
 import logoImage from "../assets/logo-mark.svg";
-import { OFFICE_ADDRESS, getWhatsAppChatUrl } from "@/config/contact";
+import { OFFICES, getWhatsAppChatUrl } from "@/config/contact";
 
 const columns = [
   {
@@ -66,9 +66,18 @@ export default function Footer() {
             <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
               Healthcare AI agents & agentic automation for modern hospitals, clinics, and care teams — secure by design.
             </p>
-            <div className="mt-6 flex items-start gap-2.5 text-sm text-muted-foreground">
-              <MapPin size={16} className="mt-0.5 shrink-0 text-primary" />
-              <span className="max-w-xs leading-relaxed">{OFFICE_ADDRESS}</span>
+            <div className="mt-6 space-y-3">
+              {OFFICES.map((office) => (
+                <div key={office.country} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+                  <MapPin size={16} className="mt-0.5 shrink-0 text-primary" />
+                  <span className="max-w-xs leading-relaxed">
+                    <span className="block text-xs font-medium uppercase tracking-[0.12em] text-foreground/55">
+                      {office.country}
+                    </span>
+                    {office.address}
+                  </span>
+                </div>
+              ))}
             </div>
             <div className="mt-6 flex items-center gap-2.5">
               {socials.map((s) => (
