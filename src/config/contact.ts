@@ -19,7 +19,7 @@ export const CONTACT_EMAIL = "hello@clawleaf.com";
 export const OFFICES: Office[] = [
   {
     country: "Netherlands",
-    address: "HTC 9 Beta, 5656AE Eindhoven, The Netherlands",
+    address: "AI Innovation Center, High Tech Campus, 5656 AE, Eindhoven, the Netherlands",
     phone: "+31 6 41166735",
     phoneHref: "+31641166735",
   },
