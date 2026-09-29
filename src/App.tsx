@@ -19,6 +19,7 @@ import PrivacyPage from "./pages/PrivacyPage.tsx";
 import TermsPage from "./pages/TermsPage.tsx";
 import VoiceAIPage from "./pages/VoiceAIPage.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
+import RouteTitle from "./components/RouteTitle.tsx";
 import WhatsAppFloat from "./components/WhatsAppFloat.tsx";
 
 const App = () => (
@@ -27,6 +28,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <ScrollToTop />
+      <RouteTitle />
       <WhatsAppFloat />
       <Routes>
         <Route path="/" element={<Index />} />

@@ -1,9 +1,45 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, type LucideIcon } from "lucide-react";
 import { useState } from "react";
-import { OFFICE_ADDRESS } from "@/config/contact";
+import { CONTACT_EMAIL, OFFICES } from "@/config/contact";
+
+function ContactRow({
+  icon: Icon,
+  label,
+  value,
+  href,
+  external,
+}: {
+  icon: LucideIcon;
+  label: string;
+  value: string;
+  href?: string;
+  external?: boolean;
+}) {
+  return (
+    <div className="flex items-start gap-4">
+      <div className="w-10 h-10 shrink-0 rounded-xl bg-primary/10 flex items-center justify-center">
+        <Icon className="w-5 h-5 text-primary" />
+      </div>
+      <div className="min-w-0">
+        <div className="text-xs text-muted-foreground">{label}</div>
+        {href ? (
+          <a
+            href={href}
+            {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+            className="text-sm font-medium text-pretty break-words hover:text-primary transition-colors"
+          >
+            {value}
+          </a>
+        ) : (
+          <div className="text-sm font-medium text-pretty break-words">{value}</div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -22,21 +58,22 @@ export default function ContactPage() {
           <div className="grid lg:grid-cols-2 gap-16">
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
               <div className="space-y-6 mb-10">
-                {[
-                  { icon: Mail, label: "Email", value: "hello@clawleaf.com" },
-                  { icon: Phone, label: "Phone", value: "+92 337 9611571" },
-                  { icon: MapPin, label: "Office", value: OFFICE_ADDRESS },
-                ].map((item) => (
-                  <div key={item.label} className="flex items-start gap-4">
-                    <div className="w-10 h-10 shrink-0 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <item.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="text-xs text-muted-foreground">{item.label}</div>
-                      <div className="text-sm font-medium text-pretty">{item.value}</div>
+                {/* Offices */}
+                {OFFICES.map((office) => (
+                  <div key={office.country} className="rounded-2xl border border-border bg-card p-6 shadow-card">
+                    <h2 className="text-lg font-bold">{office.country} Office</h2>
+                    <div className="h-px w-10 bg-primary/40 my-4" />
+                    <div className="space-y-4">
+                      <ContactRow icon={MapPin} label="Office" value={office.address} />
+                      <ContactRow icon={Phone} label="Phone" value={office.phone} href={`tel:${office.phoneHref}`} />
                     </div>
                   </div>
                 ))}
+
+                {/* Single company-wide email */}
+                <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
+                  <ContactRow icon={Mail} label="Email" value={CONTACT_EMAIL} href={`mailto:${CONTACT_EMAIL}`} />
+                </div>
               </div>
             </motion.div>
 

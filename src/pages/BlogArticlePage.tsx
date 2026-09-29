@@ -2,12 +2,13 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { PortableText } from "@portabletext/react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import groq from "groq";
 import { getSanityClient, getSanityConfig } from "@/lib/sanity";
+import { PostCover, gradientForTag } from "@/components/site/PostCover";
 
 type BlogPost = {
   _id: string;
@@ -19,6 +20,14 @@ type BlogPost = {
   body?: unknown;
   coverImageUrl?: string;
   coverImageAlt?: string;
+};
+
+type RelatedPost = {
+  _id: string;
+  slug: string;
+  title: string;
+  tag?: string;
+  coverImageUrl?: string;
 };
 
 const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][0] {
@@ -40,19 +49,20 @@ const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][0] {
   }
 }`;
 
+const relatedQuery = groq`*[_type == "post" && defined(slug.current) && slug.current != $slug] | order(publishedAt desc)[0...3] {
+  _id, "slug": slug.current, title, tag, "coverImageUrl": coverImage.asset->url
+}`;
+
 function formatPublishedDate(iso: string) {
-  // Must be deterministic across SSR (Node) + client (browser) to avoid hydration mismatches.
-  return new Intl.DateTimeFormat("en-US", {
-    timeZone: "UTC",
-    year: "numeric",
-    month: "short",
-    day: "2-digit",
-  }).format(new Date(iso));
+  return new Intl.DateTimeFormat("en-US", { timeZone: "UTC", year: "numeric", month: "short", day: "2-digit" }).format(
+    new Date(iso),
+  );
 }
 
 export default function BlogArticlePage() {
   const { slug } = useParams();
   const [post, setPost] = useState<BlogPost | null | undefined>(undefined);
+  const [related, setRelated] = useState<RelatedPost[]>([]);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [corsBlocked, setCorsBlocked] = useState(false);
 
@@ -62,7 +72,6 @@ export default function BlogArticlePage() {
       setPost(null);
       return;
     }
-    if (post !== undefined && post?.slug === slug) return;
     let cancelled = false;
     setPost(undefined);
     setLoadError(null);
@@ -86,65 +95,110 @@ export default function BlogArticlePage() {
         setLoadError(e?.message ?? "Failed to load post");
         setPost(null);
       });
+    client
+      .fetch(relatedQuery, { slug })
+      .then((res) => !cancelled && setRelated(((res as RelatedPost[]) ?? []).filter(Boolean)))
+      .catch(() => {
+        /* related is optional */
+      });
     return () => {
       cancelled = true;
     };
   }, [slug]);
 
-  const title = post?.title ?? (slug ? slug.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") : "Blog");
+  const title =
+    post?.title ??
+    (slug ? slug.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") : "Blog");
   const description = post?.excerpt ?? "Read the latest insights from Clawleaf AI.";
   const canonical = slug ? `https://clawleaf.com/blog/${slug}` : "https://clawleaf.com/blog";
+
+  useEffect(() => {
+    document.title = `${title} · Clawleaf AI`;
+  }, [title]);
 
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>{title} · Clawleaf AI</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonical} />
       </Helmet>
       <Navbar />
-      <section className="pt-32 section-padding">
-        <div className="container-narrow max-w-3xl">
-          <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-8">
-            <ArrowLeft size={14} /> Back to Blog
-          </Link>
-          <motion.article initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            {post?.tag ? (
-              <span className="text-xs font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-full">{post.tag}</span>
-            ) : null}
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mt-4 mb-4">{title}</h1>
-            {post?.publishedAt ? (
-              <p className="text-muted-foreground mb-8">
-                Published {formatPublishedDate(post.publishedAt)}
-              </p>
-            ) : null}
 
-            {post?.coverImageUrl ? (
-              <img
-                src={post.coverImageUrl}
-                alt={post.coverImageAlt ?? ""}
-                className="w-full rounded-2xl border border-border shadow-card mb-8 bg-secondary/50"
-                loading="eager"
-                decoding="async"
-              />
+      <article className="noise relative overflow-hidden pt-36 section-padding sm:pt-40">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-grid mask-fade-edges opacity-50" />
+          <div className="aurora left-1/2 top-0 h-64 w-[34rem] -translate-x-1/2 bg-primary/15" />
+        </div>
+
+        <div className="container-wide max-w-3xl">
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <ArrowLeft size={15} /> Back to Blog
+          </Link>
+
+          <motion.header
+            className="mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            {post?.tag ? (
+              <span className="inline-flex rounded-full border border-primary/20 bg-primary/10 px-3 py-1 font-mono text-[0.65rem] uppercase tracking-wider text-primary">
+                {post.tag}
+              </span>
             ) : null}
-            <div className="prose prose-lg max-w-none">
-              {post === undefined ? (
-                <p className="text-muted-foreground leading-relaxed">Loading…</p>
-              ) : post === null ? (
-                <p className="text-muted-foreground leading-relaxed">
-                  {!getSanityConfig().projectId ? (
-                    <>
-                      Blog CMS is not configured yet. Set <code>VITE_SANITY_PROJECT_ID</code> and{" "}
-                      <code>VITE_SANITY_DATASET</code> in <code>.env</code>.
-                    </>
-                  ) : loadError ? (
-                    <>Couldn’t load this post. {loadError} — try refreshing.</>
-                  ) : (
-                    "Post not found."
-                  )}
+            <h1 className="mt-5 text-balance font-display text-4xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-5xl">
+              {title}
+            </h1>
+            {post?.publishedAt ? (
+              <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
+                <Calendar size={14} /> {formatPublishedDate(post.publishedAt)}
+              </div>
+            ) : null}
+          </motion.header>
+
+          {/* Cover */}
+          {post?.coverImageUrl ? (
+            <motion.div
+              className="mt-10 overflow-hidden rounded-3xl border border-white/[0.08] shadow-card"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.7 }}
+            >
+              <img src={post.coverImageUrl} alt={post.coverImageAlt ?? ""} className="w-full" loading="eager" />
+            </motion.div>
+          ) : null}
+
+          {/* Body */}
+          <div className="mt-10">
+            {post === undefined ? (
+              <div className="space-y-4">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="h-4 animate-pulse rounded bg-white/[0.05]" style={{ width: `${90 - (i % 3) * 15}%` }} />
+                ))}
+              </div>
+            ) : post === null ? (
+              <div className="rounded-2xl border border-white/[0.08] bg-[hsl(var(--card))] p-8 text-center">
+                <p className="text-muted-foreground">
+                  {!getSanityConfig().projectId
+                    ? "Blog content isn't available in this environment."
+                    : loadError
+                    ? "Couldn't load this post — please refresh."
+                    : "Post not found."}
                 </p>
-              ) : post?.body ? (
+                {corsBlocked ? (
+                  <p className="mt-3 text-sm text-muted-foreground">
+                    If you're the site owner, add this origin to your Sanity CORS settings.
+                  </p>
+                ) : null}
+                <Link to="/blog" className="btn-secondary mt-5 inline-flex">
+                  Browse all articles
+                </Link>
+              </div>
+            ) : post.body ? (
+              <div className="prose prose-invert prose-lg max-w-none prose-headings:font-display prose-headings:tracking-tight prose-a:text-primary prose-strong:text-foreground">
                 <PortableText
                   value={post.body as any}
                   components={{
@@ -157,7 +211,7 @@ export default function BlogArticlePage() {
                             <img
                               src={src}
                               alt={value?.alt ?? ""}
-                              className="w-full rounded-2xl border border-border shadow-card bg-secondary/50"
+                              className="w-full rounded-2xl border border-white/[0.08] shadow-card"
                               loading="lazy"
                               decoding="async"
                             />
@@ -170,19 +224,63 @@ export default function BlogArticlePage() {
                     },
                   }}
                 />
-              ) : (
-                <p className="text-muted-foreground leading-relaxed">No content yet.</p>
-              )}
-            </div>
-            {corsBlocked ? (
-              <p className="text-sm text-muted-foreground mt-6">
-                This looks like a Sanity <b>CORS</b> block. In Sanity Manage → <b>API</b> → <b>CORS Origins</b>, add{" "}
-                <code>http://localhost:8080</code> (and whichever port Vite is running on), then refresh.
+              </div>
+            ) : (
+              <p className="text-muted-foreground">No content yet.</p>
+            )}
+          </div>
+
+          {/* CTA */}
+          {post ? (
+            <div className="border-gradient relative mt-14 overflow-hidden rounded-3xl border border-white/10 bg-[hsl(var(--surface-2))] p-8 text-center">
+              <div className="pointer-events-none absolute -top-16 left-1/2 h-40 w-80 -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
+              <h3 className="font-display text-2xl font-semibold text-foreground">See it work on your data</h3>
+              <p className="mx-auto mt-2 max-w-md text-muted-foreground">
+                Book a demo and watch Clawleaf agents run one of your real workflows end to end.
               </p>
-            ) : null}
-          </motion.article>
+              <Link to="/contact" className="btn-primary mt-6 inline-flex">
+                Schedule a Demo <ArrowRight size={16} />
+              </Link>
+            </div>
+          ) : null}
         </div>
-      </section>
+      </article>
+
+      {/* Keep reading */}
+      {post && related.length ? (
+        <section className="section-padding !pt-0">
+          <div className="container-wide max-w-5xl">
+            <div className="mb-8 flex items-center gap-3">
+              <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-foreground/50">Keep reading</span>
+              <div className="h-px flex-1 bg-white/[0.07]" />
+            </div>
+            <div className="grid gap-6 md:grid-cols-3">
+              {related.map((p) => (
+                <Link key={p._id} to={`/blog/${p.slug}`} className="group block">
+                  <div className="overflow-hidden rounded-3xl border border-white/[0.07] bg-[hsl(var(--card))] transition-all duration-500 group-hover:-translate-y-1 group-hover:border-white/15 group-hover:shadow-glow">
+                    {p.coverImageUrl ? (
+                      <div className="h-32 overflow-hidden">
+                        <img src={p.coverImageUrl} alt="" className="h-full w-full object-cover" loading="lazy" />
+                      </div>
+                    ) : (
+                      <PostCover tag={p.tag ?? "Article"} {...gradientForTag(p.tag)} className="h-32 w-full" />
+                    )}
+                    <div className="p-5">
+                      <h4 className="font-display text-base font-semibold leading-snug text-foreground transition-colors group-hover:text-primary">
+                        {p.title}
+                      </h4>
+                      <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary">
+                        Read <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <Footer />
     </div>
   );

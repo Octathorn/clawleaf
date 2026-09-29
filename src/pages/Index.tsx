@@ -4,6 +4,7 @@ import VoiceAISection from "@/components/VoiceAISection";
 import TrustedBySection from "@/components/TrustedBySection";
 import FeaturesSection from "@/components/FeaturesSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
+import LiveWorkflowSection from "@/components/LiveWorkflowSection";
 import UseCasesSection from "@/components/UseCasesSection";
 import CustomAISection from "@/components/CustomAISection";
 import SecuritySection from "@/components/SecuritySection";
@@ -22,6 +23,7 @@ const Index = () => {
       <TrustedBySection />
       <FeaturesSection />
       <HowItWorksSection />
+      <LiveWorkflowSection />
       <UseCasesSection />
       <CustomAISection />
       <SecuritySection />

@@ -1,67 +1,74 @@
 import { motion } from "framer-motion";
-import { Shield, Lock, Key, Users, Server } from "lucide-react";
+import { Shield, Lock, Key, Users, Server, BadgeCheck } from "lucide-react";
+import { SectionHeading, fadeUp } from "@/components/site/primitives";
 
 const items = [
-  { icon: Lock, title: "End-to-End Encryption", desc: "AES-256 encryption for data at rest and TLS 1.3 for data in transit." },
+  { icon: Lock, title: "End-to-End Encryption", desc: "AES-256 encryption for data at rest and TLS 1.3 for data in transit.", featured: true },
   { icon: Server, title: "Secure Infrastructure", desc: "SOC 2 Type II compliant cloud infrastructure with 99.99% uptime SLA." },
   { icon: Shield, title: "Healthcare Data Protection", desc: "Purpose-built data handling pipelines designed for sensitive medical data." },
   { icon: Users, title: "Role-Based Access", desc: "Granular permissions and audit logging for enterprise compliance." },
   { icon: Key, title: "HIPAA-Ready Architecture", desc: "Architecture designed to meet HIPAA security and privacy requirements." },
 ];
 
+const badges = ["HIPAA", "SOC 2", "GDPR", "ISO 27001"];
+
 export default function SecuritySection() {
   return (
-    <section className="section-padding hero-gradient relative overflow-hidden" id="security">
-      <div className="container-narrow relative z-10">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-sm font-medium text-accent uppercase tracking-widest mb-3">Security & Compliance</p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4" style={{ color: "hsl(0 0% 100%)" }}>
-            Enterprise-Grade Security
-          </h2>
-          <p className="text-lg max-w-[55ch] mx-auto" style={{ color: "hsl(210 40% 70%)" }}>
-            Your medical data is protected by multiple layers of security, encryption, and compliance frameworks.
-          </p>
-        </motion.div>
+    <section className="relative overflow-hidden section-padding" id="security">
+      {/* vault backdrop */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-grid opacity-30 mask-fade-edges" />
+        <div className="aurora left-1/2 top-1/3 h-[28rem] w-[28rem] -translate-x-1/2 bg-primary/15" />
+      </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {items.map((item, i) => (
+      <div className="container-wide">
+        <SectionHeading
+          eyebrow="Security & Compliance"
+          title="Enterprise-grade security, by default"
+          subtitle="Your medical data is protected by multiple layers of encryption, access control, and compliance frameworks."
+        />
+
+        <motion.div
+          className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3"
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07 } } }}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+        >
+          {items.map((item) => (
             <motion.div
               key={item.title}
-              className="rounded-2xl p-6 border animate-settle"
-              style={{
-                background: "hsl(222 47% 11% / 0.5)",
-                backdropFilter: "blur(16px)",
-                borderColor: "hsl(210 40% 85% / 0.1)",
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
+              variants={fadeUp}
+              className={`border-gradient group relative overflow-hidden rounded-3xl border border-white/[0.07] bg-[hsl(var(--card))] p-7 transition-all duration-500 hover:-translate-y-1 hover:shadow-glow ${
+                item.featured ? "lg:col-span-1 md:col-span-2 lg:row-span-1" : ""
+              }`}
             >
-              <item.icon className="w-8 h-8 text-accent mb-4" />
-              <h3 className="text-base font-semibold mb-2" style={{ color: "hsl(0 0% 100%)" }}>{item.title}</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "hsl(210 40% 65%)" }}>{item.desc}</p>
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-accent/20 bg-accent/10 text-accent transition-transform duration-500 group-hover:scale-110">
+                <item.icon className="h-6 w-6" />
+              </div>
+              <h3 className="mt-5 font-display text-lg font-semibold text-foreground">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
             </motion.div>
           ))}
-        </div>
 
-        <motion.div
-          className="flex flex-wrap justify-center gap-6 mt-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-        >
-          {["HIPAA", "SOC 2", "GDPR", "ISO 27001"].map((badge) => (
-            <div key={badge} className="px-5 py-2 rounded-full border text-sm font-medium" style={{ borderColor: "hsl(210 40% 85% / 0.15)", color: "hsl(210 40% 80%)" }}>
-              {badge}
+          {/* compliance card */}
+          <motion.div
+            variants={fadeUp}
+            className="relative flex flex-col justify-center overflow-hidden rounded-3xl border border-white/[0.07] bg-gradient-to-br from-primary/10 via-[hsl(var(--card))] to-accent/10 p-7"
+          >
+            <BadgeCheck className="h-6 w-6 text-primary" />
+            <p className="mt-4 text-sm font-medium text-foreground">Independently audited & certified</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {badges.map((b) => (
+                <span
+                  key={b}
+                  className="rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 font-mono text-[0.7rem] font-medium uppercase tracking-wider text-foreground/80"
+                >
+                  {b}
+                </span>
+              ))}
             </div>
-          ))}
+          </motion.div>
         </motion.div>
       </div>
     </section>

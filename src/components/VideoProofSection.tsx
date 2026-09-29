@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { PlayCircle } from "lucide-react";
+import { PlayCircle, ArrowRight } from "lucide-react";
 import heroVisual from "@/assets/hero-visual.png";
 import { videoProofShowcaseSrc } from "@/config/showcaseVideos";
 import { ShowcaseVideo } from "@/components/ShowcaseVideo";
+import { Reveal, fadeUp } from "@/components/site/primitives";
 
 const videoUrl = videoProofShowcaseSrc;
 
@@ -23,81 +24,75 @@ const outcomes = [
 
 export default function VideoProofSection() {
   return (
-    <section className="section-padding bg-secondary/50">
-      <div className="container-narrow space-y-6">
-        <motion.div
-          className="rounded-3xl border border-border bg-card p-4 md:p-6"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <div className="mb-4 flex flex-wrap items-center gap-3 text-sm md:text-[1.35rem] md:leading-none md:tracking-tight">
-            <span className="font-semibold tracking-wide text-foreground/85 md:text-sm">FROM</span>
-            <span className="font-semibold text-primary">Manual Operations</span>
-            <span className="text-foreground/70 md:text-2xl">→</span>
-            <span className="font-semibold tracking-wide text-foreground/85 md:text-sm">TO</span>
-            <span className="font-semibold text-primary">AI-Accelerated Teams</span>
-            <span className="font-medium text-muted-foreground">AI-Enabled Ops</span>
-            <span className="font-medium text-muted-foreground">Agentic AI</span>
-          </div>
+    <section className="relative section-padding bg-surface/40">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="container-wide">
+        <Reveal className="mb-12 flex flex-wrap items-center gap-x-3 gap-y-2">
+          <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted-foreground">From</span>
+          <span className="font-display text-xl font-semibold text-foreground/60 line-through decoration-white/20">
+            Manual Operations
+          </span>
+          <ArrowRight size={18} className="text-primary" />
+          <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted-foreground">To</span>
+          <span className="text-gradient font-display text-xl font-semibold">AI-Accelerated Teams</span>
+        </Reveal>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            {outcomes.map((item, index) => (
+        <div className="grid gap-6 lg:grid-cols-2">
+          {/* metrics */}
+          <motion.div
+            className="grid gap-6 sm:grid-cols-2"
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            {outcomes.map((item) => (
               <motion.div
                 key={item.title}
-                className="rounded-2xl border border-border bg-secondary px-6 py-5"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.08 * index }}
+                variants={fadeUp}
+                className="flex flex-col rounded-3xl border border-white/[0.07] bg-[hsl(var(--card))] p-7 shadow-card"
               >
-                <p className="text-2xl font-semibold tracking-tight text-foreground">{item.title}</p>
-                <p className="mt-1 text-5xl font-bold tracking-tighter text-foreground">{item.value}</p>
-                <p className="mt-5 text-sm text-muted-foreground">{item.description}</p>
+                <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted-foreground">
+                  {item.title}
+                </p>
+                <p className="mt-3 font-display text-5xl font-semibold tracking-tight text-gradient">
+                  {item.value}
+                </p>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
               </motion.div>
             ))}
-          </div>
-        </motion.div>
+          </motion.div>
 
-        <motion.div
-          className="relative overflow-hidden rounded-3xl border border-border shadow-card"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <div className="relative min-h-[320px] md:min-h-[460px]">
-            <ShowcaseVideo
-              src={videoUrl}
-              poster={heroVisual}
-              preload="auto"
-              playWhenVisible={false}
-              wrapperClassName="absolute inset-0"
-              videoClassName="absolute inset-0 h-full w-full object-cover"
-              aria-label="Automated appointment booking and patient scheduling preview"
-            />
-
-            <div className="absolute inset-y-0 right-0 flex w-full flex-col justify-between bg-gradient-to-l from-black/80 via-black/65 to-transparent p-6 text-white md:w-[43%] md:p-10">
-              <div className="text-4xl font-semibold tracking-tight">Clawleaf</div>
-
-              <div className="space-y-7">
-                <p className="text-2xl leading-[1.35] text-white/95 md:text-[2.05rem]">
-                  "We are now available to our customers 24/7, with a reduced response-time and communicate in any
-                  language they speak"
+          {/* video */}
+          <Reveal delay={0.1} className="relative overflow-hidden rounded-3xl border border-white/[0.07] shadow-card">
+            <div className="relative min-h-[340px] lg:h-full lg:min-h-[420px]">
+              <ShowcaseVideo
+                src={videoUrl}
+                poster={heroVisual}
+                preload="auto"
+                playWhenVisible={false}
+                wrapperClassName="absolute inset-0"
+                videoClassName="absolute inset-0 h-full w-full object-cover"
+                aria-label="Automated appointment booking and patient scheduling preview"
+              />
+              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/85 via-black/45 to-transparent p-7 md:p-9">
+                <p className="max-w-md text-xl font-medium leading-snug text-white md:text-2xl">
+                  "We're now available to our patients 24/7 — with faster response times, in any
+                  language they speak."
                 </p>
-
                 <a
                   href={videoUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-base font-semibold text-black shadow-card transition hover:bg-white/90"
+                  className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-white/90"
                 >
+                  <PlayCircle size={17} />
                   Watch full video
-                  <PlayCircle size={18} />
                 </a>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
