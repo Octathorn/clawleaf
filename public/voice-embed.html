@@ -5,77 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Clawleaf voice agent</title>
     <style>
-      :root { color-scheme: light; --bd:#e5e7eb; --mut:#64748b; --pri:#2563eb; }
+      :root { color-scheme: dark; }
       * { box-sizing: border-box; }
-      html, body { margin: 0; height: 100%; background: #fff; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #0f172a; -webkit-font-smoothing: antialiased; }
+      html, body { margin: 0; height: 100%; background: transparent; color: #e2e8f0;
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
       #app { display: flex; flex-direction: column; height: 100%; }
-      .hd { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--bd); }
-      .hd .ic { width: 34px; height: 34px; border-radius: 9px; background: #eef2ff; color: var(--pri); display: flex; align-items: center; justify-content: center; }
-      .hd .t { font-weight: 600; font-size: 14px; line-height: 1.2; }
-      .hd .s { font-size: 12px; color: var(--mut); }
-      .pill { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--bd); color: var(--mut); }
-      .pill .dot { width: 8px; height: 8px; border-radius: 999px; background: #cbd5e1; }
-      .pill.connecting { color: #b45309; } .pill.connecting .dot { background: #f59e0b; animation: pulse 1s infinite; }
-      .pill.connected  { color: #059669; } .pill.connected .dot { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,.15); }
-      .pill.ended .dot { background: #94a3b8; }
-      .pill.error { color: #b91c1c; } .pill.error .dot { background: #ef4444; }
-      @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-      .body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; background: #fafafa; }
-      .empty { margin: auto; text-align: center; color: #94a3b8; font-size: 13px; line-height: 1.55; padding: 16px 24px; max-width: 320px; }
-      .empty .big { font-size: 38px; line-height: 1; margin-bottom: 12px; }
+
+      .top { display: flex; align-items: center; gap: 8px; padding: 10px 12px 6px; }
+      .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;
+        padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); color: #94a3b8; }
+      .pill .dot { width: 8px; height: 8px; border-radius: 999px; background: #64748b; }
+      .pill.connecting { color: #fbbf24; } .pill.connecting .dot { background: #fbbf24; animation: pulse 1s infinite; }
+      .pill.connected  { color: #34d399; } .pill.connected .dot { background: #34d399; box-shadow: 0 0 0 3px rgba(52,211,153,.18); }
+      .pill.ended .dot { background: #64748b; }
+      .pill.error { color: #f87171; } .pill.error .dot { background: #f87171; }
+      @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+      .hint { margin-left: auto; font-size: 11px; color: #64748b; }
+      .hint.err { color: #f87171; }
+
+      .body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 8px 12px 14px;
+        display: flex; flex-direction: column; gap: 9px; }
+      .empty { margin: auto; text-align: center; color: #64748b; font-size: 13px; line-height: 1.55; padding: 8px 20px; max-width: 300px; }
+      .empty .big { font-size: 30px; line-height: 1; margin-bottom: 10px; }
       .row { display: flex; flex-direction: column; max-width: 88%; }
       .row.agent { align-items: flex-start; align-self: flex-start; }
       .row.user  { align-items: flex-end;  align-self: flex-end; }
       .who { font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin: 0 4px 3px; }
-      .row.agent .who { color: var(--pri); }
-      .row.user  .who { color: var(--mut); }
-      .bubble { padding: 9px 13px; border-radius: 15px; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; box-shadow: 0 1px 1px rgba(0,0,0,.03); }
-      .row.agent .bubble { background: #fff; color: #0f172a; border: 1px solid var(--bd); border-bottom-left-radius: 5px; }
-      .row.user  .bubble { background: var(--pri); color: #fff; border-bottom-right-radius: 5px; }
+      .row.agent .who { color: #60a5fa; }
+      .row.user  .who { color: #64748b; }
+      .bubble { padding: 9px 13px; border-radius: 15px; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+      .row.agent .bubble { background: rgba(255,255,255,.06); color: #e2e8f0; border: 1px solid rgba(255,255,255,.08); border-bottom-left-radius: 5px; }
+      .row.user  .bubble { background: #2563eb; color: #fff; border-bottom-right-radius: 5px; }
       .row.interim .bubble { opacity: .6; }
-      .sys { align-self: center; font-size: 11px; color: #94a3b8; padding: 2px 0; }
+      .sys { align-self: center; font-size: 11px; color: #64748b; padding: 2px 0; }
       .typing { display: inline-flex; gap: 3px; padding: 3px 2px; }
-      .typing i { width: 6px; height: 6px; border-radius: 999px; background: #94a3b8; animation: blink 1.2s infinite; }
+      .typing i { width: 6px; height: 6px; border-radius: 999px; background: #64748b; animation: blink 1.2s infinite; }
       .typing i:nth-child(2){ animation-delay: .2s } .typing i:nth-child(3){ animation-delay: .4s }
       @keyframes blink { 0%,60%,100%{opacity:.25} 30%{opacity:1} }
-      .ft { padding: 12px 14px; border-top: 1px solid var(--bd); display: flex; flex-direction: column; align-items: center; gap: 7px; }
-      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; font-weight: 600; padding: 11px 24px; border-radius: 11px; border: 0; cursor: pointer; transition: filter .15s, background .15s; min-width: 168px; }
-      .btn:disabled { opacity: .6; cursor: default; }
-      .btn svg { width: 17px; height: 17px; }
-      .btn.start { background: #10b981; color: #fff; }
-      .btn.start:hover:not(:disabled){ filter: brightness(.95); }
-      .btn.end { background: #ef4444; color: #fff; }
-      .btn.end:hover:not(:disabled){ filter: brightness(.95); }
-      .hint { font-size: 11px; color: var(--mut); text-align: center; min-height: 14px; }
-      .hint.err { color: #b91c1c; }
     </style>
   </head>
   <body>
     <div id="app">
-      <div class="hd">
-        <div class="ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div>
-          <div class="t">Clawleaf Voice Agent</div>
-          <div class="s">Talk to the agent live</div>
-        </div>
+      <div class="top">
         <span class="pill idle" id="pill"><span class="dot"></span><span id="pill-t">Ready</span></span>
+        <span class="hint" id="hint">Connecting your microphone…</span>
       </div>
-
       <div class="body" id="body">
         <div class="empty" id="empty">
           <div class="big">🎙️</div>
-          Press <b>Start call</b> below, allow your microphone, and start speaking.<br />The conversation appears here in real time.
+          Allow your microphone and start speaking.<br />The conversation appears here live.
         </div>
-      </div>
-
-      <div class="ft">
-        <button class="btn start" id="call-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span id="btn-t">Start call</span>
-        </button>
-        <div class="hint" id="hint">Your mic is only used during the call.</div>
       </div>
     </div>
     <div id="dograh-inline-container" style="display:none"></div>
@@ -90,11 +69,7 @@
         var empty = document.getElementById('empty');
         var pill = document.getElementById('pill');
         var pillT = document.getElementById('pill-t');
-        var btn = document.getElementById('call-btn');
         var hint = document.getElementById('hint');
-
-        var PHONE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
-        var HANGUP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91"/><line x1="23" y1="1" x2="1" y2="23"/></svg>';
 
         var state = 'idle';
         var curBot = null, curInterim = null, typingRow = null;
@@ -159,22 +134,16 @@
         function setState(s, errMsg) {
           state = s;
           pill.className = 'pill ' + s;
-          pillT.textContent = { idle:'Ready', connecting:'Connecting…', connected:'Connected', ended:'Call ended', error:'Mic needed' }[s] || s;
-          var live = (s === 'connecting' || s === 'connected');
-          btn.className = 'btn ' + (live ? 'end' : 'start');
-          btn.innerHTML = (live ? HANGUP : PHONE) + '<span id="btn-t">' + (live ? 'End call' : (s === 'ended' ? 'Call again' : 'Start call')) + '</span>';
-          btn.disabled = (s === 'connecting');
+          pillT.textContent = { idle:'Ready', connecting:'Connecting', connected:'Live', ended:'Ended', error:'Mic needed' }[s] || s;
           hint.className = 'hint' + (s === 'error' ? ' err' : '');
-          hint.textContent = s === 'error'
-            ? (errMsg || 'Microphone access is needed. Allow it and try again.')
-            : s === 'connecting' ? 'Connecting — allow your microphone if asked…'
-            : live ? 'Speak naturally — say “Hi, can you hear me?” to begin.'
-            : 'Your mic is only used during the call.';
-          if (!live) hideTyping();
+          hint.textContent = s === 'error' ? (errMsg || 'Microphone access is needed. Allow it and try again.')
+            : s === 'connecting' ? 'Connecting your microphone…'
+            : s === 'connected' ? 'Speak naturally — say hi to begin.'
+            : s === 'ended' ? 'Call ended.' : '';
+          if (s !== 'connected' && s !== 'connecting') hideTyping();
         }
         function fail(m) { hideTyping(); setState('error', m); }
-        if (!token) { setState('error', 'No agent token was provided.'); btn.disabled = true; return; }
-        if (!api) { setState('error', 'Voice service is not configured yet.'); btn.disabled = true; return; }
+        if (!token || !api) { setState('error', 'Voice service is not configured yet.'); return; }
 
         function withWidget(cb) {
           if (window.DograhWidget) return cb(window.DograhWidget);
@@ -193,32 +162,20 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'dograh-widget'));
 
-        var widget = null;
         withWidget(function (w) {
-          widget = w;
           try {
-            w.onCallConnected(function () { setState('connected'); addSys('— call connected —'); showTyping(); });
-            w.onCallEnd(function () { if (state === 'connected' || state === 'connecting') { setState('ended'); addSys('— call ended —'); } });
+            w.onCallConnected(function () { setState('connected'); showTyping(); });
+            w.onCallEnd(function () { if (state === 'connected' || state === 'connecting') setState('ended'); });
             w.onError(function (e) {
               var msg = (e && (e.message || e.detail)) || '';
               fail(/mic|microphone|permission|denied|notallowed/i.test(msg)
-                ? 'Microphone access is needed. Allow it, then press Call again.'
+                ? 'Microphone access is needed. Allow it and try again.'
                 : (msg || 'The call could not connect. Please try again.'));
             });
           } catch (x) {}
-        });
-
-        btn.addEventListener('click', function () {
-          if (!widget) return;
-          if (state === 'connecting' || state === 'connected') {
-            try { widget.end(); } catch (x) {}
-            setState('ended'); addSys('— call ended —');
-          } else {
-            curBot = null; curInterim = null; typingRow = null;
-            Array.prototype.slice.call(body.querySelectorAll('.row,.sys')).forEach(function (n) { n.remove(); });
-            setState('connecting');
-            try { widget.start(); } catch (x) { fail('Could not start the call.'); }
-          }
+          // Auto-start the call immediately (one tap from the parent widget).
+          setState('connecting');
+          try { w.start(); } catch (x) { fail('Could not start the call.'); }
         });
       })();
     </script>

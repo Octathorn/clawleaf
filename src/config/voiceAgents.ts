@@ -50,7 +50,20 @@ try {
 }
 const _fallbackToken = (import.meta.env.VITE_DOGRAH_EMBED_TOKEN as string) || "";
 
-/** Embed token for a given use case (browser demo), with single-token fallback. */
+/** Voice embed token for a given use case (browser mic demo), with single-token fallback. */
 export function getEmbedToken(agentId: string): string {
   return _tokenMap[agentId] || _fallbackToken || "";
+}
+
+let _chatMap: Record<string, string> = {};
+try {
+  _chatMap = JSON.parse((import.meta.env.VITE_DOGRAH_CHAT_TOKENS as string) || "{}");
+} catch {
+  _chatMap = {};
+}
+const _fallbackChat = (import.meta.env.VITE_DOGRAH_CHAT_TOKEN as string) || "";
+
+/** Text-chat embed token for a given use case, with single-token fallback. */
+export function getChatToken(agentId: string): string {
+  return _chatMap[agentId] || _fallbackChat || "";
 }
