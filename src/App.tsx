@@ -17,6 +17,7 @@ import UseCasesPage from "./pages/UseCasesPage.tsx";
 import RequestToolPage from "./pages/RequestToolPage.tsx";
 import PrivacyPage from "./pages/PrivacyPage.tsx";
 import TermsPage from "./pages/TermsPage.tsx";
+import VoiceAIPage from "./pages/VoiceAIPage.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 import WhatsAppFloat from "./components/WhatsAppFloat.tsx";
 
@@ -40,6 +41,7 @@ const App = () => (
         <Route path="/request-tool" element={<RequestToolPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
+        <Route path="/voice-ai" element={<VoiceAIPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </TooltipProvider>

@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Clawleaf voice agent</title>
+    <style>
+      :root { color-scheme: light; --bd:#e5e7eb; --mut:#64748b; --pri:#2563eb; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; background: #fff; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #0f172a; -webkit-font-smoothing: antialiased; }
+      #app { display: flex; flex-direction: column; height: 100%; }
+      .hd { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--bd); }
+      .hd .ic { width: 34px; height: 34px; border-radius: 9px; background: #eef2ff; color: var(--pri); display: flex; align-items: center; justify-content: center; }
+      .hd .t { font-weight: 600; font-size: 14px; line-height: 1.2; }
+      .hd .s { font-size: 12px; color: var(--mut); }
+      .pill { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--bd); color: var(--mut); }
+      .pill .dot { width: 8px; height: 8px; border-radius: 999px; background: #cbd5e1; }
+      .pill.connecting { color: #b45309; } .pill.connecting .dot { background: #f59e0b; animation: pulse 1s infinite; }
+      .pill.connected  { color: #059669; } .pill.connected .dot { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,.15); }
+      .pill.ended .dot { background: #94a3b8; }
+      .pill.error { color: #b91c1c; } .pill.error .dot { background: #ef4444; }
+      @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+      .body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; background: #fafafa; }
+      .empty { margin: auto; text-align: center; color: #94a3b8; font-size: 13px; line-height: 1.55; padding: 16px 24px; max-width: 320px; }
+      .empty .big { font-size: 38px; line-height: 1; margin-bottom: 12px; }
+      .row { display: flex; flex-direction: column; max-width: 88%; }
+      .row.agent { align-items: flex-start; align-self: flex-start; }
+      .row.user  { align-items: flex-end;  align-self: flex-end; }
+      .who { font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin: 0 4px 3px; }
+      .row.agent .who { color: var(--pri); }
+      .row.user  .who { color: var(--mut); }
+      .bubble { padding: 9px 13px; border-radius: 15px; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; box-shadow: 0 1px 1px rgba(0,0,0,.03); }
+      .row.agent .bubble { background: #fff; color: #0f172a; border: 1px solid var(--bd); border-bottom-left-radius: 5px; }
+      .row.user  .bubble { background: var(--pri); color: #fff; border-bottom-right-radius: 5px; }
+      .row.interim .bubble { opacity: .6; }
+      .sys { align-self: center; font-size: 11px; color: #94a3b8; padding: 2px 0; }
+      .typing { display: inline-flex; gap: 3px; padding: 3px 2px; }
+      .typing i { width: 6px; height: 6px; border-radius: 999px; background: #94a3b8; animation: blink 1.2s infinite; }
+      .typing i:nth-child(2){ animation-delay: .2s } .typing i:nth-child(3){ animation-delay: .4s }
+      @keyframes blink { 0%,60%,100%{opacity:.25} 30%{opacity:1} }
+      .ft { padding: 12px 14px; border-top: 1px solid var(--bd); display: flex; flex-direction: column; align-items: center; gap: 7px; }
+      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; font-weight: 600; padding: 11px 24px; border-radius: 11px; border: 0; cursor: pointer; transition: filter .15s, background .15s; min-width: 168px; }
+      .btn:disabled { opacity: .6; cursor: default; }
+      .btn svg { width: 17px; height: 17px; }
+      .btn.start { background: #10b981; color: #fff; }
+      .btn.start:hover:not(:disabled){ filter: brightness(.95); }
+      .btn.end { background: #ef4444; color: #fff; }
+      .btn.end:hover:not(:disabled){ filter: brightness(.95); }
+      .hint { font-size: 11px; color: var(--mut); text-align: center; min-height: 14px; }
+      .hint.err { color: #b91c1c; }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="hd">
+        <div class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <div class="t">Clawleaf Voice Agent</div>
+          <div class="s">Talk to the agent live</div>
+        </div>
+        <span class="pill idle" id="pill"><span class="dot"></span><span id="pill-t">Ready</span></span>
+      </div>
+
+      <div class="body" id="body">
+        <div class="empty" id="empty">
+          <div class="big">🎙️</div>
+          Press <b>Start call</b> below, allow your microphone, and start speaking.<br />The conversation appears here in real time.
+        </div>
+      </div>
+
+      <div class="ft">
+        <button class="btn start" id="call-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span id="btn-t">Start call</span>
+        </button>
+        <div class="hint" id="hint">Your mic is only used during the call.</div>
+      </div>
+    </div>
+    <div id="dograh-inline-container" style="display:none"></div>
+
+    <script>
+      (function () {
+        var q = new URLSearchParams(location.search);
+        var token = q.get('token');
+        var api = q.get('api') || '';
+
+        var body = document.getElementById('body');
+        var empty = document.getElementById('empty');
+        var pill = document.getElementById('pill');
+        var pillT = document.getElementById('pill-t');
+        var btn = document.getElementById('call-btn');
+        var hint = document.getElementById('hint');
+
+        var PHONE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+        var HANGUP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91"/><line x1="23" y1="1" x2="1" y2="23"/></svg>';
+
+        var state = 'idle';
+        var curBot = null, curInterim = null, typingRow = null;
+
+        function clearEmpty() { if (empty) { empty.remove(); empty = null; } }
+        function down() { body.scrollTop = body.scrollHeight; }
+        function makeRow(role, text) {
+          clearEmpty();
+          var row = document.createElement('div'); row.className = 'row ' + role;
+          var who = document.createElement('div'); who.className = 'who'; who.textContent = role === 'user' ? 'You' : 'Agent';
+          var bub = document.createElement('div'); bub.className = 'bubble'; bub.textContent = text;
+          row.appendChild(who); row.appendChild(bub); body.appendChild(row); down();
+          return { row: row, bub: bub };
+        }
+        function addSys(t) { clearEmpty(); var e = document.createElement('div'); e.className = 'sys'; e.textContent = t; body.appendChild(e); down(); }
+        function showTyping() {
+          if (typingRow || state !== 'connected') return;
+          clearEmpty();
+          var row = document.createElement('div'); row.className = 'row agent';
+          row.innerHTML = '<div class="who">Agent</div><div class="bubble"><span class="typing"><i></i><i></i><i></i></span></div>';
+          body.appendChild(row); typingRow = row; down();
+        }
+        function hideTyping() { if (typingRow) { typingRow.remove(); typingRow = null; } }
+        function finalizeBot() { curBot = null; }
+        function onUser(text, final) {
+          text = (text || '').trim(); finalizeBot(); if (!text) return;
+          if (curInterim) { curInterim.bub.textContent = text; } else { curInterim = makeRow('user', text); }
+          curInterim.row.className = 'row user' + (final ? '' : ' interim');
+          if (final) { curInterim = null; showTyping(); }
+          down();
+        }
+        function onBot(text) {
+          text = (text || '').trim(); if (!text) return; hideTyping();
+          if (curBot) { curBot.bub.textContent = (curBot.bub.textContent + ' ' + text).trim(); } else { curBot = makeRow('agent', text); }
+          down();
+        }
+        function handleRtf(msg) {
+          if (!msg || typeof msg.type !== 'string' || msg.type.indexOf('rtf-') !== 0) return;
+          var pl = msg.payload || {};
+          switch (msg.type) {
+            case 'rtf-user-transcription': onUser(pl.text, pl.final !== false); break;
+            case 'rtf-bot-text': onBot(pl.text); break;
+            case 'rtf-bot-started-speaking': hideTyping(); break;
+            case 'rtf-bot-stopped-speaking': finalizeBot(); break;
+          }
+        }
+        function onWire(data) { if (typeof data !== 'string') return; var m; try { m = JSON.parse(data); } catch (e) { return; } if (Array.isArray(m)) m.forEach(handleRtf); else handleRtf(m); }
+
+        (function () {
+          var N = window.WebSocket; if (!N) return;
+          function W(u, p) { var w = p !== undefined ? new N(u, p) : new N(u); try { w.addEventListener('message', function (e) { onWire(e.data); }); } catch (x) {} return w; }
+          W.prototype = N.prototype; ['CONNECTING','OPEN','CLOSING','CLOSED'].forEach(function (k) { W[k] = N[k]; }); window.WebSocket = W;
+        })();
+        (function () {
+          var P = window.RTCPeerConnection || window.webkitRTCPeerConnection; if (!P) return;
+          function at(c) { if (c) { try { c.addEventListener('message', function (e) { onWire(e.data); }); } catch (x) {} } }
+          var oc = P.prototype.createDataChannel; if (oc) P.prototype.createDataChannel = function () { var c = oc.apply(this, arguments); at(c); return c; };
+          function WP() { var pc = new (Function.prototype.bind.apply(P, [null].concat([].slice.call(arguments))))(); try { pc.addEventListener('datachannel', function (e) { at(e.channel); }); } catch (x) {} return pc; }
+          WP.prototype = P.prototype; window.RTCPeerConnection = WP; if (window.webkitRTCPeerConnection) window.webkitRTCPeerConnection = WP;
+        })();
+
+        function setState(s, errMsg) {
+          state = s;
+          pill.className = 'pill ' + s;
+          pillT.textContent = { idle:'Ready', connecting:'Connecting…', connected:'Connected', ended:'Call ended', error:'Mic needed' }[s] || s;
+          var live = (s === 'connecting' || s === 'connected');
+          btn.className = 'btn ' + (live ? 'end' : 'start');
+          btn.innerHTML = (live ? HANGUP : PHONE) + '<span id="btn-t">' + (live ? 'End call' : (s === 'ended' ? 'Call again' : 'Start call')) + '</span>';
+          btn.disabled = (s === 'connecting');
+          hint.className = 'hint' + (s === 'error' ? ' err' : '');
+          hint.textContent = s === 'error'
+            ? (errMsg || 'Microphone access is needed. Allow it and try again.')
+            : s === 'connecting' ? 'Connecting — allow your microphone if asked…'
+            : live ? 'Speak naturally — say “Hi, can you hear me?” to begin.'
+            : 'Your mic is only used during the call.';
+          if (!live) hideTyping();
+        }
+        function fail(m) { hideTyping(); setState('error', m); }
+        if (!token) { setState('error', 'No agent token was provided.'); btn.disabled = true; return; }
+        if (!api) { setState('error', 'Voice service is not configured yet.'); btn.disabled = true; return; }
+
+        function withWidget(cb) {
+          if (window.DograhWidget) return cb(window.DograhWidget);
+          var s = document.getElementById('dograh-widget');
+          if (s) s.addEventListener('load', function () { if (window.DograhWidget) cb(window.DograhWidget); }, { once: true });
+        }
+
+        // Load the self-hosted headless widget (served from this same origin).
+        (function (d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = '/dograh-widget.js?token=' + encodeURIComponent(token) + '&environment=production&apiEndpoint=' + encodeURIComponent(api);
+          js.setAttribute('data-dograh-context', JSON.stringify({ page_url: location.href, today: new Date().toISOString().slice(0, 10) }));
+          js.async = true;
+          js.onerror = function () { fail("Couldn't load the voice service. Please try again."); };
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'dograh-widget'));
+
+        var widget = null;
+        withWidget(function (w) {
+          widget = w;
+          try {
+            w.onCallConnected(function () { setState('connected'); addSys('— call connected —'); showTyping(); });
+            w.onCallEnd(function () { if (state === 'connected' || state === 'connecting') { setState('ended'); addSys('— call ended —'); } });
+            w.onError(function (e) {
+              var msg = (e && (e.message || e.detail)) || '';
+              fail(/mic|microphone|permission|denied|notallowed/i.test(msg)
+                ? 'Microphone access is needed. Allow it, then press Call again.'
+                : (msg || 'The call could not connect. Please try again.'));
+            });
+          } catch (x) {}
+        });
+
+        btn.addEventListener('click', function () {
+          if (!widget) return;
+          if (state === 'connecting' || state === 'connected') {
+            try { widget.end(); } catch (x) {}
+            setState('ended'); addSys('— call ended —');
+          } else {
+            curBot = null; curInterim = null; typingRow = null;
+            Array.prototype.slice.call(body.querySelectorAll('.row,.sys')).forEach(function (n) { n.remove(); });
+            setState('connecting');
+            try { widget.start(); } catch (x) { fail('Could not start the call.'); }
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

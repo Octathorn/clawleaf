@@ -6,6 +6,7 @@ import logoImage from "../assets/nav_logo.svg";
 
 const navLinks = [
   { label: "Product", href: "/product" },
+  { label: "Voice AI", href: "/voice-ai" },
   { label: "Solutions", href: "/use-cases" },
   { label: "Pricing", href: "/pricing" },
   { label: "Security", href: "/security" },
