@@ -63,14 +63,14 @@ export default function Navbar() {
           <Wordmark />
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="hidden items-center gap-1 xl:flex">
             {navLinks.map((link) => {
               const active = location.pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors duration-300 ${
+                  className={`relative whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium transition-colors duration-300 ${
                     active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -87,14 +87,14 @@ export default function Navbar() {
             })}
           </nav>
 
-          <div className="hidden items-center gap-2 lg:flex">
+          <div className="hidden items-center gap-2 xl:flex">
             <Link
               to="/contact"
-              className="rounded-full px-3.5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               Contact Sales
             </Link>
-            <Link to="/request-tool" className="btn-primary !px-5 !py-2.5 text-sm">
+            <Link to="/request-tool" className="btn-primary whitespace-nowrap !px-5 !py-2.5 text-sm">
               Request Automation
               <ArrowUpRight size={16} />
             </Link>
@@ -102,7 +102,7 @@ export default function Navbar() {
 
           {/* Mobile toggle */}
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-foreground lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-foreground xl:hidden"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -119,7 +119,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25 }}
-            className="container-wide lg:hidden"
+            className="container-wide xl:hidden"
           >
             <div className="glass mt-2 rounded-2xl border border-white/10 p-3 shadow-card">
               <div className="flex flex-col">
