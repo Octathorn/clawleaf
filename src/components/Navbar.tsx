@@ -7,7 +7,7 @@ import logoImage from "../assets/logo-mark.svg";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Product", href: "/product" },
-  { label: "Voice AI", href: "/voice-ai" },
+  { label: "Voice Agents", href: "/voice-agents" },
   { label: "Solutions", href: "/use-cases" },
   { label: "Pricing", href: "/pricing" },
   { label: "Security", href: "/security" },

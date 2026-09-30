@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import VoiceDemo from "@/components/VoiceDemo";
+import VoiceConversations from "@/components/VoiceConversations";
+import TrustedBySection from "@/components/TrustedBySection";
 import {
   Mic,
   CalendarCheck,
@@ -66,7 +68,7 @@ export default function VoiceAIPage() {
           name="description"
           content="Hear Clawleaf's voice AI agent live — it calls your phone or talks in your browser. Human-like healthcare receptionists that book appointments, answer questions, and run 24/7."
         />
-        <link rel="canonical" href="https://clawleaf.com/voice-ai" />
+        <link rel="canonical" href="https://clawleaf.com/voice-agents" />
       </Helmet>
 
       <Navbar />
@@ -157,6 +159,12 @@ export default function VoiceAIPage() {
           </div>
         </div>
       </section>
+
+      {/* Hear it in action — pre-recorded conversation showcase */}
+      <VoiceConversations />
+
+      {/* Trusted by leading healthcare organizations (reused from homepage) */}
+      <TrustedBySection />
 
       {/* Closing CTA */}
       <section className="section-padding">

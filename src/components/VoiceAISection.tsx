@@ -4,7 +4,7 @@ import { Mic, Phone, ArrowRight } from "lucide-react";
 
 /**
  * Homepage interactive Voice-AI teaser, placed right after the hero.
- * The whole panel is a link into the dedicated /voice-ai experience where the
+ * The whole panel is a link into the dedicated /voice-agents experience where the
  * live phone + browser demo lives.
  */
 export default function VoiceAISection() {
@@ -31,21 +31,21 @@ export default function VoiceAISection() {
               phone, or talk straight from your browser.
             </p>
             <Link
-              to="/voice-ai"
+              to="/voice-agents"
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-semibold shadow-glow hover:opacity-90 animate-settle"
             >
               Try the live demo <ArrowRight size={18} />
             </Link>
           </motion.div>
 
-          {/* Interactive-looking widget card → routes to /voice-ai */}
+          {/* Interactive-looking widget card → routes to /voice-agents */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <Link to="/voice-ai" className="block group" aria-label="Open the live voice AI demo">
+            <Link to="/voice-agents" className="block group" aria-label="Open the live voice AI demo">
               <div className="relative rounded-3xl p-8 hero-gradient shadow-glow overflow-hidden animate-settle group-hover:scale-[1.01]">
                 <div
                   className="absolute inset-0 opacity-30"

@@ -29,6 +29,7 @@ async function main() {
   const staticRoutes = [
     "/",
     "/product",
+    "/voice-agents",
     "/pricing",
     "/about",
     "/security",

@@ -1,0 +1,178 @@
+{
+  "receptionist": [
+    {
+      "speaker": "agent",
+      "voice": "ava",
+      "text": "Thanks for calling Riverside Family Clinic — this is Ava. How can I help you today?",
+      "file": "/voice-samples/receptionist/01.mp3",
+      "bytes": 79038
+    },
+    {
+      "speaker": "caller",
+      "voice": "eric",
+      "text": "Hi, I think I left my jacket in the waiting room after my appointment yesterday.",
+      "file": "/voice-samples/receptionist/02.mp3",
+      "bytes": 61066
+    },
+    {
+      "speaker": "agent",
+      "voice": "ava",
+      "text": "Oh no! Let me check for you. Was it around 3 in the afternoon, with Dr. Lee?",
+      "file": "/voice-samples/receptionist/03.mp3",
+      "bytes": 79874
+    },
+    {
+      "speaker": "caller",
+      "voice": "eric",
+      "text": "Yeah, that's right. It's a navy blue raincoat.",
+      "file": "/voice-samples/receptionist/04.mp3",
+      "bytes": 38914
+    },
+    {
+      "speaker": "agent",
+      "voice": "ava",
+      "text": "Found it noted — I'll have the front desk set it aside under your name. Come by anytime we're open.",
+      "file": "/voice-samples/receptionist/05.mp3",
+      "bytes": 93248
+    },
+    {
+      "speaker": "caller",
+      "voice": "eric",
+      "text": "That's such a relief. Thank you!",
+      "file": "/voice-samples/receptionist/06.mp3",
+      "bytes": 24703
+    }
+  ],
+  "appointment": [
+    {
+      "speaker": "agent",
+      "voice": "ava",
+      "text": "Riverside Family Clinic, this is Ava. Would you like to book, reschedule, or confirm a visit?",
+      "file": "/voice-samples/appointment/01.mp3",
+      "bytes": 90323
+    },
+    {
+      "speaker": "caller",
+      "voice": "laura",
+      "text": "I need to move my Thursday appointment — something came up at work.",
+      "file": "/voice-samples/appointment/02.mp3",
+      "bytes": 55214
+    },
+    {
+      "speaker": "agent",
+      "voice": "ava",
+      "text": "No problem at all. I have Monday at 10, or Tuesday at 2:30. Which works better for you?",
+      "file": "/voice-samples/appointment/03.mp3",
+      "bytes": 89487
+    },
+    {
+      "speaker": "caller",
+      "voice": "laura",
+      "text": "Tuesday at 2:30 would be perfect.",
+      "file": "/voice-samples/appointment/04.mp3",
+      "bytes": 36824
+    },
+    {
+      "speaker": "agent",
+      "voice": "ava",
+      "text": "You're all set for Tuesday at 2:30 with Dr. Lee. I'll text you a reminder the day before.",
+      "file": "/voice-samples/appointment/05.mp3",
+      "bytes": 77784
+    },
+    {
+      "speaker": "caller",
+      "voice": "laura",
+      "text": "Amazing — thank you so much!",
+      "file": "/voice-samples/appointment/06.mp3",
+      "bytes": 27629
+    }
+  ],
+  "coordinator": [
+    {
+      "speaker": "agent",
+      "voice": "ava",
+      "text": "Hi, this is Ava calling from Riverside Family Clinic about your visit next week. Do you have a quick minute?",
+      "file": "/voice-samples/coordinator/01.mp3",
+      "bytes": 91577
+    },
+    {
+      "speaker": "caller",
+      "voice": "brian",
+      "text": "Sure, go ahead.",
+      "file": "/voice-samples/coordinator/02.mp3",
+      "bytes": 19688
+    },
+    {
+      "speaker": "agent",
+      "voice": "ava",
+      "text": "Wonderful. I just need to confirm a couple things — are you still taking any medications daily?",
+      "file": "/voice-samples/coordinator/03.mp3",
+      "bytes": 97010
+    },
+    {
+      "speaker": "caller",
+      "voice": "brian",
+      "text": "Just my blood pressure tablet, ten milligrams.",
+      "file": "/voice-samples/coordinator/04.mp3",
+      "bytes": 41839
+    },
+    {
+      "speaker": "agent",
+      "voice": "ava",
+      "text": "Perfect, I've noted that. Please remember to fast for eight hours before your blood test. Okay?",
+      "file": "/voice-samples/coordinator/05.mp3",
+      "bytes": 98264
+    },
+    {
+      "speaker": "caller",
+      "voice": "brian",
+      "text": "Got it. I'll see you next week.",
+      "file": "/voice-samples/coordinator/06.mp3",
+      "bytes": 28465
+    }
+  ],
+  "refills": [
+    {
+      "speaker": "agent",
+      "voice": "ava",
+      "text": "Riverside Family Clinic, this is Ava. I can help with a prescription refill — what do you need?",
+      "file": "/voice-samples/refills/01.mp3",
+      "bytes": 84471
+    },
+    {
+      "speaker": "caller",
+      "voice": "alice",
+      "text": "I'm nearly out of my inhaler and I need a refill before the weekend.",
+      "file": "/voice-samples/refills/02.mp3",
+      "bytes": 66499
+    },
+    {
+      "speaker": "agent",
+      "voice": "ava",
+      "text": "I can take care of that. I'll send it to your pharmacy on Fifth Street — is that still the right one?",
+      "file": "/voice-samples/refills/03.mp3",
+      "bytes": 87815
+    },
+    {
+      "speaker": "caller",
+      "voice": "alice",
+      "text": "Yes, that's the one.",
+      "file": "/voice-samples/refills/04.mp3",
+      "bytes": 24703
+    },
+    {
+      "speaker": "agent",
+      "voice": "ava",
+      "text": "Great — it'll be ready for pickup this afternoon. Is there anything else I can help with?",
+      "file": "/voice-samples/refills/05.mp3",
+      "bytes": 76112
+    },
+    {
+      "speaker": "caller",
+      "voice": "alice",
+      "text": "No, that's everything. Thank you!",
+      "file": "/voice-samples/refills/06.mp3",
+      "bytes": 33062
+    }
+  ]
+}
