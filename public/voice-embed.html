@@ -4,44 +4,70 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Clawleaf voice agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
       :root { color-scheme: dark; }
       * { box-sizing: border-box; }
       html, body { margin: 0; height: 100%; background: transparent; color: #e2e8f0;
-        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
       #app { display: flex; flex-direction: column; height: 100%; }
 
-      .top { display: flex; align-items: center; gap: 8px; padding: 10px 12px 6px; }
-      .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;
-        padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); color: #94a3b8; }
-      .pill .dot { width: 8px; height: 8px; border-radius: 999px; background: #64748b; }
-      .pill.connecting { color: #fbbf24; } .pill.connecting .dot { background: #fbbf24; animation: pulse 1s infinite; }
-      .pill.connected  { color: #34d399; } .pill.connected .dot { background: #34d399; box-shadow: 0 0 0 3px rgba(52,211,153,.18); }
+      /* ── Status bar ── */
+      .top { display: flex; align-items: center; gap: 8px; padding: 12px 14px 8px; }
+      .pill { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600;
+        padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,.1);
+        background: rgba(255,255,255,.03); color: #94a3b8; transition: color .3s, background .3s, border-color .3s; }
+      .pill .dot { width: 8px; height: 8px; border-radius: 999px; background: #64748b; transition: background .3s; }
+      .pill.connecting { color: #fbbf24; border-color: rgba(251,191,36,.25); background: rgba(251,191,36,.08); }
+      .pill.connecting .dot { background: #fbbf24; animation: pulse 1s infinite; }
+      .pill.connected  { color: #34d399; border-color: rgba(52,211,153,.3); background: rgba(52,211,153,.1); }
+      .pill.connected .dot { background: #34d399; animation: livepulse 1.6s ease-in-out infinite; }
       .pill.ended .dot { background: #64748b; }
-      .pill.error { color: #f87171; } .pill.error .dot { background: #f87171; }
+      .pill.error { color: #f87171; border-color: rgba(248,113,113,.3); background: rgba(248,113,113,.08); }
+      .pill.error .dot { background: #f87171; }
       @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
-      .hint { margin-left: auto; font-size: 11px; color: #64748b; }
+      @keyframes livepulse { 0%,100%{box-shadow:0 0 0 2px rgba(52,211,153,.28)} 50%{box-shadow:0 0 0 6px rgba(52,211,153,.05)} }
+      .hint { margin-left: auto; font-size: 11px; color: #64748b; text-align: right; }
       .hint.err { color: #f87171; }
 
-      .body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 8px 12px 14px;
-        display: flex; flex-direction: column; gap: 9px; }
-      .empty { margin: auto; text-align: center; color: #64748b; font-size: 13px; line-height: 1.55; padding: 8px 20px; max-width: 300px; }
-      .empty .big { font-size: 30px; line-height: 1; margin-bottom: 10px; }
+      /* ── Transcript ── */
+      .body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 6px 14px 16px;
+        display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; }
+      .body::-webkit-scrollbar { width: 8px; }
+      .body::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 999px; }
+      .body::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.18); }
+
+      /* ── Empty state with brand orb ── */
+      .empty { margin: auto; text-align: center; color: #94a3b8; font-size: 13px; line-height: 1.6;
+        padding: 8px 20px; max-width: 300px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+      .orb { width: 76px; height: 76px; border-radius: 999px;
+        background: radial-gradient(circle at 32% 30%, #86efac 0%, #38bdf8 42%, #2563eb 78%, #1e3a8a 100%);
+        box-shadow: 0 0 46px rgba(56,189,248,.38), inset 0 0 28px rgba(255,255,255,.15);
+        animation: breathe 4s ease-in-out infinite; }
+      @keyframes breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
+
+      /* ── Bubbles ── */
       .row { display: flex; flex-direction: column; max-width: 88%; }
       .row.agent { align-items: flex-start; align-self: flex-start; }
       .row.user  { align-items: flex-end;  align-self: flex-end; }
-      .who { font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin: 0 4px 3px; }
-      .row.agent .who { color: #60a5fa; }
+      .who { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin: 0 4px 4px; }
+      .row.agent .who { color: #38bdf8; }
       .row.user  .who { color: #64748b; }
-      .bubble { padding: 9px 13px; border-radius: 15px; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+      .bubble { padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
       .row.agent .bubble { background: rgba(255,255,255,.06); color: #e2e8f0; border: 1px solid rgba(255,255,255,.08); border-bottom-left-radius: 5px; }
-      .row.user  .bubble { background: #2563eb; color: #fff; border-bottom-right-radius: 5px; }
-      .row.interim .bubble { opacity: .6; }
+      .row.user  .bubble { background: #3b82f6; color: #fff; border-bottom-right-radius: 5px; box-shadow: 0 8px 20px -12px rgba(59,130,246,.65); }
+      .row.interim .bubble { opacity: .55; }
       .sys { align-self: center; font-size: 11px; color: #64748b; padding: 2px 0; }
-      .typing { display: inline-flex; gap: 3px; padding: 3px 2px; }
-      .typing i { width: 6px; height: 6px; border-radius: 999px; background: #64748b; animation: blink 1.2s infinite; }
+      .typing { display: inline-flex; gap: 4px; padding: 4px 2px; }
+      .typing i { width: 6px; height: 6px; border-radius: 999px; background: #94a3b8; animation: blink 1.2s infinite; }
       .typing i:nth-child(2){ animation-delay: .2s } .typing i:nth-child(3){ animation-delay: .4s }
       @keyframes blink { 0%,60%,100%{opacity:.25} 30%{opacity:1} }
+
+      @media (prefers-reduced-motion: reduce) {
+        .orb, .pill .dot, .typing i { animation: none !important; }
+      }
     </style>
   </head>
   <body>
@@ -52,8 +78,8 @@
       </div>
       <div class="body" id="body">
         <div class="empty" id="empty">
-          <div class="big">🎙️</div>
-          Allow your microphone and start speaking.<br />The conversation appears here live.
+          <div class="orb"></div>
+          <div>Allow your microphone and start speaking.<br />Your conversation appears here live.</div>
         </div>
       </div>
     </div>
