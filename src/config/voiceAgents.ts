@@ -11,6 +11,8 @@ import type { LucideIcon } from "lucide-react";
 export type VoiceAgent = {
   id: string;
   label: string;
+  /** Short label used in the compact agent picker chips. */
+  short: string;
   desc: string;
   icon: LucideIcon;
 };
@@ -19,24 +21,28 @@ export const VOICE_AGENTS: VoiceAgent[] = [
   {
     id: "receptionist",
     label: "Receptionist",
+    short: "Receptionist",
     desc: "Answers, routes calls & takes messages",
     icon: Headphones,
   },
   {
     id: "appointment",
     label: "Appointment Booking",
+    short: "Appointments",
     desc: "Books, reschedules & confirms visits",
     icon: CalendarCheck,
   },
   {
     id: "coordinator",
     label: "Patient Coordinator",
+    short: "Coordinator",
     desc: "Intake, guidance & follow-ups",
     icon: HeartPulse,
   },
   {
     id: "refills",
     label: "Prescription Refills",
+    short: "Refills",
     desc: "Handles refill & pharmacy requests",
     icon: Pill,
   },

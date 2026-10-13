@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mic, Phone, MessageSquare, AudioLines, Send, PhoneOff, Loader2, ArrowRight } from "lucide-react";
+import { Mic, MessageSquare, AudioLines, Send, PhoneOff, Loader2 } from "lucide-react";
 import { VOICE_AGENTS, getEmbedToken, getChatToken, type VoiceAgent } from "@/config/voiceAgents";
 
 const VOICE_API_URL = (import.meta.env.VITE_VOICE_API_URL as string | undefined)?.replace(/\/$/, "") || "";
@@ -175,15 +175,12 @@ export default function VoiceDemo() {
           </div>
         </div>
 
-        {/* ── Step 1: pick an agent (always-visible, obviously selectable) ── */}
-        <div className="px-4 pt-4 sm:px-5">
-          <p className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-            <span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary/15 text-[10px] font-bold text-primary">
-              1
-            </span>
+        {/* ── Pick an agent (always-visible, obviously selectable) ── */}
+        <div className="px-4 pt-3.5 sm:px-5">
+          <p className="mb-2 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
             Choose who you want to talk to
           </p>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-1.5">
             {VOICE_AGENTS.map((a) => {
               const on = a.id === agent.id;
               return (
@@ -192,37 +189,23 @@ export default function VoiceDemo() {
                   type="button"
                   onClick={() => switchAgent(a)}
                   aria-pressed={on}
-                  title={a.desc}
-                  className={`group flex items-center gap-2.5 rounded-2xl border px-3 py-2.5 text-left animate-settle ${
+                  title={a.label}
+                  className={`flex items-center gap-2 rounded-lg border px-2.5 py-1.5 text-left transition-colors ${
                     on
-                      ? "border-primary/50 bg-primary/10 shadow-glow"
-                      : "border-border bg-white/[0.02] hover:border-primary/30 hover:bg-white/[0.04]"
+                      ? "border-primary/50 bg-primary/10 text-foreground"
+                      : "border-border bg-white/[0.02] text-muted-foreground hover:bg-white/[0.04] hover:text-foreground"
                   }`}
                 >
-                  <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl animate-settle ${
-                      on ? "bg-primary/20 text-primary" : "bg-secondary text-muted-foreground group-hover:text-foreground"
-                    }`}
-                  >
-                    <a.icon className="h-4 w-4" />
-                  </span>
-                  <span className="min-w-0">
-                    <span
-                      className={`block text-[13px] font-semibold leading-tight ${
-                        on ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
-                      }`}
-                    >
-                      {a.label}
-                    </span>
-                  </span>
+                  <a.icon className={`h-3.5 w-3.5 shrink-0 ${on ? "text-primary" : ""}`} />
+                  <span className="truncate text-[12.5px] font-medium">{a.short}</span>
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* ── Step 2: talk / type ── */}
-        <div className="relative mt-4" style={{ height: 368 }}>
+        {/* ── Talk / type ── */}
+        <div className="relative mt-3.5" style={{ height: 300 }}>
           <AnimatePresence mode="wait">
             {mode === "voice" ? (
               <motion.div
@@ -255,9 +238,9 @@ export default function VoiceDemo() {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex h-full flex-col items-center justify-between gap-5 border-t border-border px-5 pb-5 pt-6">
+                  <div className="flex h-full flex-col items-center justify-between gap-4 border-t border-border px-5 pb-5 pt-5">
                     {/* Orb + greeting */}
-                    <div className="flex flex-1 flex-col items-center justify-center gap-5">
+                    <div className="flex flex-1 flex-col items-center justify-center gap-4">
                       <motion.div
                         className="relative"
                         animate={{ scale: [1, 1.05, 1] }}
@@ -266,11 +249,11 @@ export default function VoiceDemo() {
                         <div
                           className="rounded-full"
                           style={{
-                            width: 120,
-                            height: 120,
+                            width: 90,
+                            height: 90,
                             background:
                               "radial-gradient(circle at 32% 30%, #86efac 0%, #38bdf8 42%, #2563eb 78%, #1e3a8a 100%)",
-                            boxShadow: "0 0 60px rgba(56,189,248,0.35), inset 0 0 40px rgba(255,255,255,0.15)",
+                            boxShadow: "0 0 46px rgba(56,189,248,0.32), inset 0 0 30px rgba(255,255,255,0.15)",
                           }}
                         />
                         <motion.div
@@ -282,28 +265,20 @@ export default function VoiceDemo() {
                           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                         />
                       </motion.div>
-                      <p className="max-w-[28ch] text-center text-sm leading-relaxed text-muted-foreground">
+                      <p className="max-w-[30ch] text-center text-[13px] leading-relaxed text-muted-foreground">
                         {greeting}
                       </p>
                     </div>
 
-                    {/* Primary action — clearly labeled */}
+                    {/* Primary action */}
                     <div className="w-full">
-                      <p className="mb-2 flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                        <span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary/15 text-[10px] font-bold text-primary">
-                          2
-                        </span>
-                        Talk to it right here
-                      </p>
                       <button
                         type="button"
                         onClick={() => setWebCall(true)}
                         disabled={!voiceReady}
-                        className="group inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="group inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50"
                       >
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/20">
-                          <Mic size={15} />
-                        </span>
+                        <Mic size={16} />
                         Start talking in your browser
                       </button>
                       <p className="mt-2 text-center text-[11px] text-muted-foreground">
@@ -375,30 +350,6 @@ export default function VoiceDemo() {
             )}
           </AnimatePresence>
         </div>
-
-        {/* ── Phone-call CTA (replaces the dead "SOON" button) ── */}
-        {!webCall && (
-          <a
-            href="/contact"
-            className="group flex items-center gap-3 border-t border-border bg-white/[0.02] px-4 py-3.5 animate-settle hover:bg-white/[0.04] sm:px-5"
-          >
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
-              <Phone size={16} />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-[13px] font-semibold text-foreground">
-                Prefer a real phone call?
-              </span>
-              <span className="block text-xs text-muted-foreground">
-                We'll set up an agent that calls your patients — book a quick walkthrough.
-              </span>
-            </span>
-            <ArrowRight
-              size={16}
-              className="shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary"
-            />
-          </a>
-        )}
       </div>
     </div>
   );

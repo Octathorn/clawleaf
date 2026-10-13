@@ -14,6 +14,8 @@ import {
   PhoneForwarded,
   FileText,
   Stethoscope,
+  Phone,
+  ArrowRight,
 } from "lucide-react";
 
 const capabilities = [
@@ -104,6 +106,25 @@ export default function VoiceAIPage() {
                   <div className="w-1.5 h-1.5 rounded-full bg-primary" /> 24/7 inbound & outbound
                 </span>
               </div>
+
+              {/* Prefer a phone call? — lives here (not in the demo card) */}
+              <a
+                href="/contact"
+                className="group mt-9 inline-flex items-center gap-3 rounded-2xl border border-border bg-white/[0.02] px-4 py-3 transition-colors hover:border-primary/30 hover:bg-white/[0.04]"
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <Phone className="h-4 w-4" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold text-foreground">
+                    Prefer a real phone call?
+                  </span>
+                  <span className="block text-xs text-muted-foreground">
+                    We'll set up an agent that calls your patients — book a quick walkthrough.
+                  </span>
+                </span>
+                <ArrowRight className="ml-1 h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+              </a>
             </motion.div>
 
             <motion.div
