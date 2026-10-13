@@ -20,7 +20,7 @@ export default function FinalCTASection() {
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
             Join organizations using Clawleaf's agentic AI platform to automate complex clinical and
-            administrative work — safely, and at scale.
+            administrative work, safely, and at scale.
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3.5">

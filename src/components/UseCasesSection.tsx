@@ -25,7 +25,7 @@ export default function UseCasesSection() {
         <SectionHeading
           eyebrow="Use Cases"
           title="Real-world applications, deployed"
-          subtitle="Agentic AI and specialized agents for intake, revenue cycle, voice, and documentation — all in one platform."
+          subtitle="Agentic AI and specialized agents for intake, revenue cycle, voice, and documentation, all in one platform."
         />
 
         <motion.div

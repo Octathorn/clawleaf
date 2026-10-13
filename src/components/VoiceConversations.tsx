@@ -158,7 +158,7 @@ export default function VoiceConversations() {
           </h2>
           <p className="text-muted-foreground text-lg max-w-[55ch] mx-auto">
             Press play, or pick a use case below. These sample calls show how each agent listens,
-            understands and responds — the way a great front desk would.
+            understands and responds, the way a great front desk would.
           </p>
         </motion.div>
 

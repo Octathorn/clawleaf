@@ -40,13 +40,6 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: EASE }}
         >
-          <div className="chip mb-7">
-            <span className="flex h-1.5 w-1.5 items-center justify-center">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse-glow" />
-            </span>
-            The future of healthcare, autonomous
-          </div>
-
           <h1 className="text-balance text-[2.75rem] font-semibold leading-[1.02] tracking-tight text-foreground sm:text-6xl lg:text-[4.1rem]">
             AI agents & automation for{" "}
             <span className="text-gradient">modern healthcare</span>
@@ -54,7 +47,7 @@ export default function HeroSection() {
 
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
             Deploy autonomous healthcare agents and agentic workflows alongside OCR, computer
-            vision, voice AI, and intelligent document processing — governed, auditable, and built
+            vision, voice AI, and intelligent document processing, governed, auditable, and built
             to scale.
           </p>
 
@@ -93,7 +86,7 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Product frame — live OCR extraction demo */}
+        {/* Product frame, live OCR extraction demo */}
         <motion.div
           className="lg:col-span-6"
           initial={{ opacity: 0, scale: 0.96, y: 18 }}

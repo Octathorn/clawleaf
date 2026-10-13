@@ -2,7 +2,7 @@ import { Headphones, CalendarCheck, HeartPulse, Pill } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 /**
- * Selectable demo use cases. Each `id` maps — via env — to a Dograh workflow
+ * Selectable demo use cases. Each `id` maps, via env, to a Dograh workflow
  * (its own prompt/behavior):
  *   - browser tab: VITE_DOGRAH_EMBED_TOKENS  = JSON { "<id>": "<embed token>" }
  *   - phone tab:   DOGRAH_WORKFLOW_UUIDS      = JSON { "<id>": "<workflow uuid>" } (server-side)

@@ -26,7 +26,7 @@ export function gradientForTag(tag?: string): { from: string; to: string } {
   return GRADIENTS[sum % GRADIENTS.length];
 }
 
-/** Gradient cover with a category icon watermark — no stock photography. */
+/** Gradient cover with a category icon watermark, no stock photography. */
 export function PostCover({
   tag,
   from,

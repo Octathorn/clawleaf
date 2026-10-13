@@ -26,7 +26,7 @@ export default function VoiceAISection() {
               Talk to a <span className="text-gradient">voice agent</span> right now
             </h2>
             <p className="text-muted-foreground text-lg max-w-[52ch] mb-8 leading-relaxed">
-              Hear a Clawleaf receptionist handle a real conversation — book an
+              Hear a Clawleaf receptionist handle a real conversation, book an
               appointment, answer questions, confirm a visit. Get a call on your
               phone, or talk straight from your browser.
             </p>

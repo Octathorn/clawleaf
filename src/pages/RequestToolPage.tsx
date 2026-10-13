@@ -25,7 +25,7 @@ export default function RequestToolPage() {
           <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <p className="text-sm font-medium text-primary uppercase tracking-widest mb-3">Agentic AI & agents</p>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tighter mb-6">Request custom agents & automation</h1>
-            <p className="text-xl text-muted-foreground max-w-[55ch] mx-auto">Tell us about your workflows and upload reference files—we design healthcare AI agents and integrations around your policies and systems.</p>
+            <p className="text-xl text-muted-foreground max-w-[55ch] mx-auto">Tell us about your workflows and upload reference files, we design healthcare AI agents and integrations around your policies and systems.</p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-16">

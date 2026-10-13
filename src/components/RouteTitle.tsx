@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
  * Kept outside react-helmet-async to avoid title-revert races on navigation.
  */
 const TITLES: Record<string, string> = {
-  "/": "Clawleaf AI — Healthcare AI Agents & Agentic Automation",
+  "/": "Clawleaf AI · Healthcare AI Agents & Agentic Automation",
   "/product": "Product · Clawleaf AI",
   "/pricing": "Pricing · Clawleaf AI",
   "/about": "About · Clawleaf AI",

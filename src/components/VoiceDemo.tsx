@@ -93,7 +93,7 @@ export default function VoiceDemo() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text, expected_revision: revision }),
       });
-      if (post.status === 429) throw new Error("You're going a bit fast — give it a moment and try again.");
+      if (post.status === 429) throw new Error("You're going a bit fast, give it a moment and try again.");
       if (!post.ok) throw new Error("The assistant couldn't respond. Please try again.");
       let d = await post.json();
       setMessages(turnsToMessages(sess(d).turns));
@@ -124,7 +124,7 @@ export default function VoiceDemo() {
   };
 
   const voiceReady = !!embedToken && !!VOICE_API_URL;
-  const greeting = `Hi! I'm Clawleaf's ${agent.label.toLowerCase()} agent. Talk to me by voice or chat — how can I help?`;
+  const greeting = `Hi! I'm Clawleaf's ${agent.label.toLowerCase()} agent. Talk to me by voice or chat, how can I help?`;
 
   return (
     <div className="relative">
@@ -139,16 +139,8 @@ export default function VoiceDemo() {
       />
 
       <div className="card-surface overflow-hidden rounded-3xl">
-        {/* ── Header: live badge + Voice/Chat toggle ── */}
-        <div className="flex items-center justify-between gap-3 px-4 pt-4 sm:px-5">
-          <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 text-[11px] font-semibold text-accent">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-            </span>
-            Live demo
-          </span>
-
+        {/* ── Header: Voice/Chat toggle ── */}
+        <div className="flex items-center justify-end gap-3 px-4 pt-4 sm:px-5">
           <div className="flex rounded-full border border-border bg-background/50 p-1">
             {(["voice", "chat"] as Mode[]).map((m) => (
               <button
@@ -284,7 +276,7 @@ export default function VoiceDemo() {
                       <p className="mt-2 text-center text-[11px] text-muted-foreground">
                         {voiceReady
                           ? "Allow your microphone when asked, then just start speaking."
-                          : "Voice demo is being configured — try the Chat tab for now."}
+                          : "Voice demo is being configured, try the Chat tab for now."}
                       </p>
                     </div>
                   </div>

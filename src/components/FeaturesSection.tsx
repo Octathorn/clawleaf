@@ -25,7 +25,7 @@ export default function FeaturesSection() {
         <SectionHeading
           eyebrow="Platform Capabilities"
           title="One platform. Every healthcare workflow."
-          subtitle="Purpose-built AI and autonomous agents for healthcare — hover any capability to explore it."
+          subtitle="Purpose-built AI and autonomous agents for healthcare, hover any capability to explore it."
         />
 
         <motion.div

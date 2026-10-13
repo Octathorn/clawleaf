@@ -164,7 +164,7 @@
           hint.className = 'hint' + (s === 'error' ? ' err' : '');
           hint.textContent = s === 'error' ? (errMsg || 'Microphone access is needed. Allow it and try again.')
             : s === 'connecting' ? 'Connecting your microphone…'
-            : s === 'connected' ? 'Speak naturally — say hi to begin.'
+            : s === 'connected' ? 'Speak naturally, say hi to begin.'
             : s === 'ended' ? 'Call ended.' : '';
           if (s !== 'connected' && s !== 'connecting') hideTyping();
         }

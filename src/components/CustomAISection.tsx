@@ -13,7 +13,7 @@ const modules = [
 ];
 
 const bullets = [
-  "Composable stack — combine agents, OCR, voice, and vision as one system",
+  "Composable stack, combine agents, OCR, voice, and vision as one system",
   "Purpose-built for your clinical and administrative operations",
   "Human-in-the-loop controls with full audit trails",
 ];

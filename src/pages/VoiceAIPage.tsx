@@ -32,7 +32,7 @@ const capabilities = [
   {
     icon: Clock,
     title: "24/7 availability",
-    desc: "Answers every inbound call and places outbound reminders around the clock — no hold music, no voicemail.",
+    desc: "Answers every inbound call and places outbound reminders around the clock, no hold music, no voicemail.",
   },
   {
     icon: Languages,
@@ -68,7 +68,7 @@ export default function VoiceAIPage() {
         <title>Voice AI Agents for Healthcare · Clawleaf</title>
         <meta
           name="description"
-          content="Hear Clawleaf's voice AI agent live — it calls your phone or talks in your browser. Human-like healthcare receptionists that book appointments, answer questions, and run 24/7."
+          content="Hear Clawleaf's voice AI agent live, it calls your phone or talks in your browser. Human-like healthcare receptionists that book appointments, answer questions, and run 24/7."
         />
         <link rel="canonical" href="https://clawleaf.com/voice-agents" />
       </Helmet>
@@ -84,15 +84,11 @@ export default function VoiceAIPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/10 mb-6">
-                <div className="w-2 h-2 rounded-full bg-accent animate-pulse-glow" />
-                <span className="text-xs font-medium text-accent">Live interactive demo</span>
-              </div>
               <h1 className="text-5xl md:text-6xl font-bold tracking-tighter leading-[0.98] mb-6">
                 Voice AI agents that sound <span className="text-gradient">human</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-[52ch] mb-8 leading-relaxed">
-                Clawleaf voice agents answer, book, confirm and follow up — on the phone and in the
+                Clawleaf voice agents answer, book, confirm and follow up, on the phone and in the
                 browser. Try it yourself: have the agent call you now, or talk to it right here.
               </p>
               <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-muted-foreground">
@@ -107,7 +103,7 @@ export default function VoiceAIPage() {
                 </span>
               </div>
 
-              {/* Prefer a phone call? — lives here (not in the demo card) */}
+              {/* Prefer a phone call?, lives here (not in the demo card) */}
               <a
                 href="/contact"
                 className="group mt-9 inline-flex items-center gap-3 rounded-2xl border border-border bg-white/[0.02] px-4 py-3 transition-colors hover:border-primary/30 hover:bg-white/[0.04]"
@@ -120,7 +116,7 @@ export default function VoiceAIPage() {
                     Prefer a real phone call?
                   </span>
                   <span className="block text-xs text-muted-foreground">
-                    We'll set up an agent that calls your patients — book a quick walkthrough.
+                    We'll set up an agent that calls your patients, book a quick walkthrough.
                   </span>
                 </span>
                 <ArrowRight className="ml-1 h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
@@ -181,7 +177,7 @@ export default function VoiceAIPage() {
         </div>
       </section>
 
-      {/* Hear it in action — pre-recorded conversation showcase */}
+      {/* Hear it in action, pre-recorded conversation showcase */}
       <VoiceConversations />
 
       {/* Trusted by leading healthcare organizations (reused from homepage) */}
@@ -200,7 +196,7 @@ export default function VoiceAIPage() {
               Bring a voice agent to your front desk
             </h2>
             <p className="text-lg text-muted-foreground mb-10 max-w-[50ch] mx-auto">
-              See how Clawleaf voice AI fits your clinic — book a walkthrough with our team.
+              See how Clawleaf voice AI fits your clinic, book a walkthrough with our team.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a

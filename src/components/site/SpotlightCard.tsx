@@ -2,7 +2,7 @@ import { useRef, type ReactNode, type MouseEvent } from "react";
 
 /**
  * Card with a cursor-following spotlight glow + gradient hairline on hover.
- * Pure CSS variables updated on pointer move — no re-renders.
+ * Pure CSS variables updated on pointer move, no re-renders.
  */
 export function SpotlightCard({
   children,

@@ -64,7 +64,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-              Healthcare AI agents & agentic automation for modern hospitals, clinics, and care teams — secure by design.
+              Healthcare AI agents & agentic automation for modern hospitals, clinics, and care teams, secure by design.
             </p>
             <div className="mt-6 space-y-3">
               {OFFICES.map((office) => (

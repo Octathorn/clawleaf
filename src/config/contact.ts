@@ -40,6 +40,6 @@ export function getWhatsAppNumber(): string {
 }
 
 export function getWhatsAppChatUrl(): string {
-  const text = encodeURIComponent("Hi — I have a question about Clawleaf.");
+  const text = encodeURIComponent("Hi, I have a question about Clawleaf.");
   return `https://wa.me/${getWhatsAppNumber()}?text=${text}`;
 }

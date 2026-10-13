@@ -77,7 +77,7 @@ export default function VideoProofSection() {
               />
               <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/85 via-black/45 to-transparent p-7 md:p-9">
                 <p className="max-w-md text-xl font-medium leading-snug text-white md:text-2xl">
-                  "We're now available to our patients 24/7 — with faster response times, in any
+                  "We're now available to our patients 24/7, with faster response times, in any
                   language they speak."
                 </p>
                 <a

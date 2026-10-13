@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 
 /**
  * Wraps a child (e.g. a button/link) so it drifts toward the cursor on hover,
- * then springs back on leave — a subtle, premium magnetic micro-interaction.
+ * then springs back on leave, a subtle, premium magnetic micro-interaction.
  */
 export function Magnetic({ children, strength = 0.35 }: { children: ReactNode; strength?: number }) {
   const ref = useRef<HTMLDivElement>(null);

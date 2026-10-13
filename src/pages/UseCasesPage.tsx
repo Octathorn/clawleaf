@@ -7,12 +7,12 @@ import { getShowcaseClip, useCaseVideoByTitle } from "@/config/showcaseVideos";
 import { ShowcaseVideo } from "@/components/ShowcaseVideo";
 
 const useCases = [
-  { title: "Agentic Operations & Orchestration", desc: "Run end-to-end healthcare operations with AI agents that navigate prior authorization, eligibility, scheduling, and follow-ups—calling tools and updating systems with full traceability.", impact: "Fewer manual handoffs" },
-  { title: "Patient Intake Automation", desc: "Digitize and process patient intake forms automatically. Our AI reads handwritten and printed forms, extracts patient data, and populates your EMR system — reducing wait times by 80%.", impact: "80% faster processing" },
-  { title: "Insurance Claim Processing", desc: "Automate the entire claim lifecycle — from document intake to submission. AI validates claim data, flags discrepancies, and routes claims for faster reimbursement.", impact: "60% fewer claim errors" },
+  { title: "Agentic Operations & Orchestration", desc: "Run end-to-end healthcare operations with AI agents that navigate prior authorization, eligibility, scheduling, and follow-ups, calling tools and updating systems with full traceability.", impact: "Fewer manual handoffs" },
+  { title: "Patient Intake Automation", desc: "Digitize and process patient intake forms automatically. Our AI reads handwritten and printed forms, extracts patient data, and populates your EMR system, reducing wait times by 80%.", impact: "80% faster processing" },
+  { title: "Insurance Claim Processing", desc: "Automate the entire claim lifecycle, from document intake to submission. AI validates claim data, flags discrepancies, and routes claims for faster reimbursement.", impact: "60% fewer claim errors" },
   { title: "Lab Result Extraction", desc: "Extract structured data from lab results in any format. Our OCR engine handles printed reports, handwritten notes, and even faxed documents with clinical-grade accuracy.", impact: "99.4% extraction accuracy" },
   { title: "Medical Record Summarization", desc: "Generate concise, clinician-ready summaries from lengthy medical records. AI identifies key diagnoses, medications, procedures, and follow-up items.", impact: "5x faster chart review" },
-  { title: "Voice Appointment Booking", desc: "AI voice agents handle inbound patient calls, check availability, book appointments, and send confirmations — all without human intervention.", impact: "3x more calls handled" },
+  { title: "Voice Appointment Booking", desc: "AI voice agents handle inbound patient calls, check availability, book appointments, and send confirmations, all without human intervention.", impact: "3x more calls handled" },
   { title: "Clinical Documentation", desc: "Assist clinicians with automated note-taking, transcription, and structured documentation that meets compliance requirements.", impact: "2 hours saved per clinician/day" },
 ];
 

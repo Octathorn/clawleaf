@@ -281,7 +281,7 @@ export default function BlogPage() {
           {!loading && !filtered.length ? (
             <div className="mx-auto max-w-lg rounded-3xl border border-white/[0.08] bg-[hsl(var(--card))] p-10 text-center">
               <p className="text-muted-foreground">
-                {loadError ? "We couldn't load posts right now — please refresh." : "No articles published yet. Check back soon."}
+                {loadError ? "We couldn't load posts right now, please refresh." : "No articles published yet. Check back soon."}
               </p>
               {corsBlocked ? (
                 <p className="mt-3 text-sm text-muted-foreground">
@@ -308,7 +308,7 @@ export default function BlogPage() {
                       Get research in your inbox
                     </h3>
                     <p className="mt-2 max-w-md leading-relaxed text-muted-foreground">
-                      New pieces on healthcare AI, agents, and compliance — straight to your inbox. No spam, unsubscribe anytime.
+                      New pieces on healthcare AI, agents, and compliance, straight to your inbox. No spam, unsubscribe anytime.
                     </p>
                   </div>
                   <div>

@@ -37,7 +37,7 @@ const edges: [string, string][] = [
 
 const byId = Object.fromEntries(nodes.map((n) => [n.id, n]));
 
-/** Per-status visual treatment — active/processing nodes glow; idle nodes stay dark. */
+/** Per-status visual treatment, active/processing nodes glow; idle nodes stay dark. */
 function nodeStyle(status: Status): {
   wrap: string;
   glow: string;
@@ -219,7 +219,7 @@ export default function LiveWorkflowSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.6, ease: EASE }}
           >
-            One instruction sets an entire agentic pipeline in motion — intake, reasoning,
+            One instruction sets an entire agentic pipeline in motion, intake, reasoning,
             verification, and hand-off across your systems, on desktop and mobile.
           </motion.p>
         </div>

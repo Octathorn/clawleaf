@@ -21,7 +21,7 @@ const word: Variants = {
 };
 
 /**
- * Splits `text` into words and reveals each with a masked upward rise on scroll —
+ * Splits `text` into words and reveals each with a masked upward rise on scroll , 
  * the signature heading motion of the reference site.
  */
 export function TextReveal({ text, className = "", delay = 0, stagger = 0.045 }: TextRevealProps) {

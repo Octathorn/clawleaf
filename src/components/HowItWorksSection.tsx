@@ -3,10 +3,10 @@ import { Upload, Cpu, Search, Zap, BarChart3 } from "lucide-react";
 import { SectionHeading, EASE } from "@/components/site/primitives";
 
 const steps = [
-  { icon: Upload, title: "Upload or Connect", desc: "Connect your medical data sources — EMR, documents, imaging systems." },
+  { icon: Upload, title: "Upload or Connect", desc: "Connect your medical data sources, EMR, documents, imaging systems." },
   { icon: Cpu, title: "AI & Agents Process Data", desc: "Models and specialized agents process documents, images, and voice data in parallel." },
   { icon: Search, title: "Extract & Understand", desc: "Structured medical information is extracted with clinical-grade accuracy." },
-  { icon: Zap, title: "Agentic Automation", desc: "AI agents complete multi-step workflows — billing, scheduling, records, and follow-ups." },
+  { icon: Zap, title: "Agentic Automation", desc: "AI agents complete multi-step workflows, billing, scheduling, records, and follow-ups." },
   { icon: BarChart3, title: "Deliver Insights", desc: "Receive structured data, analytics, and actionable clinical insights." },
 ];
 

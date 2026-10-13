@@ -185,7 +185,7 @@ export default function BlogArticlePage() {
                   {!getSanityConfig().projectId
                     ? "Blog content isn't available in this environment."
                     : loadError
-                    ? "Couldn't load this post — please refresh."
+                    ? "Couldn't load this post, please refresh."
                     : "Post not found."}
                 </p>
                 {corsBlocked ? (
