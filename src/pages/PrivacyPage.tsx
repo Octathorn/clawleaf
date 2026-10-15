@@ -158,7 +158,6 @@ export default function PrivacyPage() {
             <h2>13. Contact Us</h2>
             <p>
               If you have questions or requests regarding this Privacy Policy or your personal data, contact us at{" "}
-              <a href="mailto:privacy@clawleaf.com">privacy@clawleaf.com</a> or{" "}
               <a href="mailto:hello@clawleaf.com">hello@clawleaf.com</a>.
             </p>
             <p>
